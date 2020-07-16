@@ -1,0 +1,311 @@
+// /*
+// Farbschema generiert auf
+// https://www.webmart.de/web/harmonische-farben/#ff5900:t:d:g:b
+// */
+
+// $red-50: #ffa566 !default;
+// $red-100: #ff9c56 !default;
+// $red-200: #ff9144 !default;
+// $red-300: #ff8530 !default;
+// $red-400: #ff7819 !default;
+// $red-500: #ff6900 !default; // Blaze Orange
+// $red-600: #e55e00 !default;
+// $red-700: #ce5400 !default;
+// $red-800: #b94b00 !default;
+// $red-900: #a64300 !default;
+// $red-a100: #ffaa6f !default;
+// $red-a200: #ff8e3f !default;
+// $red-a400: #bf4e00 !default;
+// $red-a700: #8f3a00 !default;
+// $red: $red-500 !default;
+
+// $purple-50: #d09366 !default;
+// $purple-100: #cb8756 !default;
+// $purple-200: #c67a44 !default;
+// $purple-300: #c06c30 !default;
+// $purple-400: #ba5c19 !default;
+// $purple-500: #b34a00 !default; // Fire
+// $purple-600: #a14200 !default;
+// $purple-700: #903b00 !default;
+// $purple-800: #813500 !default;
+// $purple-900: #742f00 !default;
+// $purple-a100: #d4996f !default;
+// $purple-a200: #c6773f !default;
+// $purple-a400: #863700 !default;
+// $purple-a700: #642900 !default;
+// $purple: $purple-500 !default;
+
+// $pink-50: #ffe7d7 !default;
+// $pink-100: #ffe5d3 !default;
+// $pink-200: #ffe3cf !default;
+// $pink-300: #ffe0ca !default;
+// $pink-400: #ffddc5 !default;
+// $pink-500: #ffdabf !default; // Negroni
+// $pink-600: #e5c4ab !default;
+// $pink-700: #ceb099 !default;
+// $pink-800: #b99e89 !default;
+// $pink-900: #a68e7b !default;
+// $pink-a100: #ffeadb !default;
+// $pink-a200: #ffe3cf !default;
+// $pink-a400: #bfa38f !default;
+// $pink-a700: #8f7a6b !default;
+// $pink: $pink-500 !default;
+
+// $deep-purple-50: #ffd1b2 !default;
+// $deep-purple-100: #ffccaa !default;
+// $deep-purple-200: #ffc7a1 !default;
+// $deep-purple-300: #ffc197 !default;
+// $deep-purple-400: #ffbb8c !default;
+// $deep-purple-500: #ffb480 !default; // Macaroni and Cheese
+// $deep-purple-600: #e5a273 !default;
+// $deep-purple-700: #ce9167 !default;
+// $deep-purple-800: #b9825c !default;
+// $deep-purple-900: #a67552 !default;
+// $deep-purple-a100: #ffd4b7 !default;
+// $deep-purple-a200: #ffc69f !default;
+// $deep-purple-a400: #bf8760 !default;
+// $deep-purple-a700: #8f6548 !default;
+// $deep-purple: $deep-purple-500 !default;
+
+// $light-blue-50: #66bdc3 !default;
+// $light-blue-100: #56b6bd !default;
+// $light-blue-200: #44aeb6 !default;
+// $light-blue-300: #30a5ae !default;
+// $light-blue-400: #199ca5 !default;
+// $light-blue-500: #00929c !default; // Persian Green
+// $light-blue-600: #00838c !default;
+// $light-blue-700: #00757e !default;
+// $light-blue-800: #006971 !default;
+// $light-blue-900: #005e65 !default;
+// $light-blue-a100: #6fc1c6 !default;
+// $light-blue-a200: #3fadb4 !default;
+// $light-blue-a400: #006d75 !default;
+// $light-blue-a700: #005157 !default;
+// $light-blue: $light-blue-500 !default;
+
+// $blue-50: #66a3a6 !default;
+// $blue-100: #56999d !default;
+// $blue-200: #448e93 !default;
+// $blue-300: #308288 !default;
+// $blue-400: #19757b !default;
+// $blue-500: #00666d !default; // Blue Stone
+// $blue-600: #005b62 !default;
+// $blue-700: #005158 !default;
+// $blue-800: #00484f !default;
+// $blue-900: #004047 !default;
+// $blue-a100: #6fa8ac !default;
+// $blue-a200: #3f8c91 !default;
+// $blue-a400: #004c51 !default;
+// $blue-a700: #00393c !default;
+// $blue: $blue-500 !default;
+
+// $cyan-50: #d7fbff !default;
+// $cyan-100: #d3fbff !default;
+// $cyan-200: #cffbff !default;
+// $cyan-300: #cafbff !default;
+// $cyan-400: #c5fbff !default;
+// $cyan-500: #bffbff !default; // Onahau
+// $cyan-600: #abe1e5 !default;
+// $cyan-700: #99cace !default;
+// $cyan-800: #89b5b9 !default;
+// $cyan-900: #7ba2a6 !default;
+// $cyan-a100: #dbfcff !default;
+// $cyan-a200: #cffcff !default;
+// $cyan-a400: #8fbcbf !default;
+// $cyan-a700: #6b8d8f !default;
+// $cyan: $cyan-500 !default;
+
+// $indigo-50: #b2f7ff !default;
+// $indigo-100: #aaf7ff !default;
+// $indigo-200: #a1f7ff !default;
+// $indigo-300: #97f7ff !default;
+// $indigo-400: #8cf7ff !default;
+// $indigo-500: #80f7ff !default; // Anakiwa
+// $indigo-600: #73dee5 !default;
+// $indigo-700: #67c7ce !default;
+// $indigo-800: #5cb3b9 !default;
+// $indigo-900: #52a1a6 !default;
+// $indigo-a100: #b7faff !default;
+// $indigo-a200: #9ff9ff !default;
+// $indigo-a400: #60b9bf !default;
+// $indigo-a700: #488a8f !default;
+// $indigo: $indigo-500 !default;
+
+// $green-50: #7774ce !default;
+// $green-100: #6865c9 !default;
+// $green-200: #5854c4 !default;
+// $green-300: #4642be !default;
+// $green-400: #322db7 !default;
+// $green-500: #1c16b0 !default; // Persian Blue
+// $green-600: #19139e !default;
+// $green-700: #16118e !default;
+// $green-800: #130f7f !default;
+// $green-900: #110d72 !default;
+// $green-a100: #7e7bd2 !default;
+// $green-a200: #5450c3 !default;
+// $green-a400: #151084 !default;
+// $green-a700: #0f0c63 !default;
+// $green: $green-500 !default;
+
+// $light-green-50: #736fae !default;
+// $light-green-100: #6460a6 !default;
+// $light-green-200: #534f9d !default;
+// $light-green-300: #403c93 !default;
+// $light-green-400: #2b2788 !default;
+// $light-green-500: #140f7b !default; // Deep Koamaru
+// $light-green-600: #120d6e !default;
+// $light-green-700: #100b63 !default;
+// $light-green-800: #0e0959 !default;
+// $light-green-900: #0c0850 !default;
+// $light-green-a100: #7a78b4 !default;
+// $light-green-a200: #4e4b9c !default;
+// $light-green-a400: #0f0b5c !default;
+// $light-green-a700: #0b0845 !default;
+// $light-green: $light-green-500 !default;
+
+// $lime-50: #dddcff !default;
+// $lime-100: #dad9ff !default;
+// $lime-200: #d6d5ff !default;
+// $lime-300: #d2d1ff !default;
+// $lime-400: #ceccff !default;
+// $lime-500: #c9c7ff !default; // Periwinkle
+// $lime-600: #b4b3e5 !default;
+// $lime-700: #a2a1ce !default;
+// $lime-800: #9190b9 !default;
+// $lime-900: #8281a6 !default;
+// $lime-a100: #e0dfff !default;
+// $lime-a200: #d6d5ff !default;
+// $lime-a400: #9695bf !default;
+// $lime-a700: #706f8f !default;
+// $lime: $lime-500 !default;
+
+// $teal-50: #bebdff !default;
+// $teal-100: #b7b6ff !default;
+// $teal-200: #afaeff !default;
+// $teal-300: #a7a5ff !default;
+// $teal-400: #9e9bff !default;
+// $teal-500: #9490ff !default; // Melrose
+// $teal-600: #8581e5 !default;
+// $teal-700: #7774ce !default;
+// $teal-800: #6b68b9 !default;
+// $teal-900: #605da6 !default;
+// $teal-a100: #c2c0ff !default;
+// $teal-a200: #aeabff !default;
+// $teal-a400: #6f6cbf !default;
+// $teal-a700: #53518f !default;
+// $teal: $teal-500 !default;
+
+// $yellow-50: #ffd266 !default;
+// $yellow-100: #ffcd56 !default;
+// $yellow-200: #ffc844 !default;
+// $yellow-300: #ffc230 !default;
+// $yellow-400: #ffbc19 !default;
+// $yellow-500: #ffb500 !default; // Selective Yellow
+// $yellow-600: #e5a200 !default;
+// $yellow-700: #ce9100 !default;
+// $yellow-800: #b98200 !default;
+// $yellow-900: #a67500 !default;
+// $yellow-a100: #ffd56f !default;
+// $yellow-a200: #ffc73f !default;
+// $yellow-a400: #bf8700 !default;
+// $yellow-a700: #8f6500 !default;
+// $yellow: $yellow-500 !default;
+
+// $deep-orange-50: #d0b166 !default;
+// $deep-orange-100: #cba956 !default;
+// $deep-orange-200: #c6a044 !default;
+// $deep-orange-300: #c09630 !default;
+// $deep-orange-400: #ba8b19 !default;
+// $deep-orange-500: #b37f00 !default; // Pirate Gold
+// $deep-orange-600: #a17200 !default;
+// $deep-orange-700: #906600 !default;
+// $deep-orange-800: #815b00 !default;
+// $deep-orange-900: #745100 !default;
+// $deep-orange-a100: #d4b76f !default;
+// $deep-orange-a200: #c69f3f !default;
+// $deep-orange-a400: #865f00 !default;
+// $deep-orange-a700: #644700 !default;
+// $deep-orange: $deep-orange-500 !default;
+
+// $orange-50: #fff2d7 !default;
+// $orange-100: #fff1d3 !default;
+// $orange-200: #fff0cf !default;
+// $orange-300: #ffefca !default;
+// $orange-400: #ffeec5 !default;
+// $orange-500: #ffedbf !default; // Egg White
+// $orange-600: #e5d5ab !default;
+// $orange-700: #cebf99 !default;
+// $orange-800: #b9ab89 !default;
+// $orange-900: #a6997b !default;
+// $orange-a100: #fff4db !default;
+// $orange-a200: #fff1cf !default;
+// $orange-a400: #bfb18f !default;
+// $orange-a700: #8f846b !default;
+// $orange: $orange-500 !default;
+
+// $amber-50: #ffe7b2 !default;
+// $amber-100: #ffe5aa !default;
+// $amber-200: #ffe3a1 !default;
+// $amber-300: #ffe097 !default;
+// $amber-400: #ffdd8c !default;
+// $amber-500: #ffda80 !default; // Salomie
+// $amber-600: #e5c473 !default;
+// $amber-700: #ceb067 !default;
+// $amber-800: #b99e5c !default;
+// $amber-900: #a68e52 !default;
+// $amber-a100: #ffeab7 !default;
+// $amber-a200: #ffe39f !default;
+// $amber-a400: #bfa360 !default;
+// $amber-a700: #8f7a48 !default;
+// $amber: $amber-500 !default;
+
+// $brown-50: #efebe9 !default;
+// $brown-100: #d7ccc8 !default;
+// $brown-200: #bcaaa4 !default;
+// $brown-300: #a1887f !default;
+// $brown-400: #8d6e63 !default;
+// $brown-500: #795548 !default;
+// $brown-600: #6d4c41 !default;
+// $brown-700: #5d4037 !default;
+// $brown-800: #4e342e !default;
+// $brown-900: #3e2723 !default;
+// $brown-a100: #d7ccc8 !default;
+// $brown-a200: #bcaaa4 !default;
+// $brown-a400: #8d6e63 !default;
+// $brown-a700: #5d4037 !default;
+// $brown: $brown-500 !default;
+
+// $grey-50: #fafafa !default;
+// $grey-100: #f5f5f5 !default;
+// $grey-200: #eee !default;
+// $grey-300: #e0e0e0 !default;
+// $grey-400: #bdbdbd !default;
+// $grey-500: #9e9e9e !default;
+// $grey-600: #757575 !default;
+// $grey-700: #616161 !default;
+// $grey-800: #424242 !default;
+// $grey-900: #212121 !default;
+// $grey-a100: #f5f5f5 !default;
+// $grey-a200: #eee !default;
+// $grey-a400: #bdbdbd !default;
+// $grey-a700: #616161 !default;
+// $grey: $grey-500 !default;
+
+// $blue-grey-50: #eceff1 !default;
+// $blue-grey-100: #cfd8dc !default;
+// $blue-grey-200: #b0bec5 !default;
+// $blue-grey-300: #90a4ae !default;
+// $blue-grey-400: #78909c !default;
+// $blue-grey-500: #607d8b !default;
+// $blue-grey-600: #546e7a !default;
+// $blue-grey-700: #455a64 !default;
+// $blue-grey-800: #37474f !default;
+// $blue-grey-900: #263238 !default;
+// $blue-grey-a100: #cfd8dc !default;
+// $blue-grey-a200: #b0bec5 !default;
+// $blue-grey-a400: #78909c !default;
+// $blue-grey-a700: #455a64 !default;
+// $blue-grey: $blue-grey-500 !default;
+
+// $black: #000;
+// $white: #fff;

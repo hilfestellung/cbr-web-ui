@@ -7,9 +7,11 @@ import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { useAuth0 } from "@auth0/auth0-react";
 // import NavDropdown from "react-bootstrap/NavDropdown";
 
 function Navigation() {
+  const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
   return (
     <Navbar bg="light" expand="lg">
       <Navbar.Brand as={Link} to="/">
@@ -41,11 +43,25 @@ function Navigation() {
           */}
         </Nav>
         {/*
+         */}
         <Form inline>
-          <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-          <Button variant="outline-success">Search</Button>
+          {isAuthenticated ? (
+            <>
+              <Button
+                variant="outline-secondary"
+                onClick={() =>
+                  logout({ returnTo: window.location.origin + "/logout" })
+                }
+              >
+                Abmelden
+              </Button>
+            </>
+          ) : (
+            <Button variant="primary" onClick={() => loginWithRedirect()}>
+              Anmelden
+            </Button>
+          )}
         </Form>
-        */}
       </Navbar.Collapse>
     </Navbar>
   );

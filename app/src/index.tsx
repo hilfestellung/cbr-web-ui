@@ -1,10 +1,12 @@
+import "./errorhandler";
+
 import React from "react";
 import ReactDOM from "react-dom";
-
 import { Provider } from "react-redux";
+import { Auth0Provider } from "@auth0/auth0-react";
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./index.scss";
+// import "bootstrap/dist/css/bootstrap.min.css";
+import "./styles/index.scss";
 
 import * as serviceWorker from "./serviceWorker";
 
@@ -16,7 +18,13 @@ const store = configureStore();
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <Auth0Provider
+        domain="cdein.eu.auth0.com"
+        clientId="m4baaRyqUhaKqAos3T4W24ZGg0FJa4ox"
+        redirectUri={window.location.origin}
+      >
+        <App />
+      </Auth0Provider>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
