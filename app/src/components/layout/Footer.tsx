@@ -4,6 +4,9 @@ import { Link } from "react-router-dom";
 import Container from "react-bootstrap/esm/Container";
 
 import { getLocalItem } from "../../utils/storage";
+import globals from "../../globals";
+
+const { version } = globals;
 
 function Footer() {
   return (
@@ -23,7 +26,7 @@ function Footer() {
           </a>
         </div>
         <div className="text-center">
-          Client ID: {getLocalItem("client_id")}
+          Client ID: {getLocalItem("client_id")} - Version: v{version}
         </div>
       </Container>
     </div>

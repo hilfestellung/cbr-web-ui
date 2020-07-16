@@ -20,9 +20,9 @@ function levelToString(level: LoggerLevel) {
     case LoggerLevel.Error:
       return "ERROR";
     case LoggerLevel.Warn:
-      return "WARN";
+      return " WARN";
     case LoggerLevel.Info:
-      return "INFO";
+      return " INFO";
     case LoggerLevel.Debug:
       return "DEBUG";
     case LoggerLevel.Trace:
@@ -30,8 +30,11 @@ function levelToString(level: LoggerLevel) {
   }
 }
 
-function formatMessage(level: LoggerLevel, args: any[]): any[] {
-  return [`${new Date().toISOString()} [${levelToString(level)}] -`, ...args];
+function formatMessage(level: LoggerLevel, name: string, args: any[]): any[] {
+  return [
+    `${new Date().toISOString()} ${levelToString(level)} [${name}] -`,
+    ...args,
+  ];
 }
 
 export class Logger {
@@ -80,7 +83,7 @@ export class Logger {
       if (!this.isEnabled(level)) {
         return;
       }
-      const message = formatMessage(level, args);
+      const message = formatMessage(level, this.name, args);
       switch (level) {
         case LoggerLevel.Error:
           console.error(...message);

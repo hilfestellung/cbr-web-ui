@@ -1,10 +1,14 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
 import createSagaRuntime from "redux-saga";
 import { all, spawn } from "redux-saga/effects";
 
 import { composeWithDevTools } from "redux-devtools-extension";
 
 import getLogger from "./utils/logger";
+
+import globals from "./globals";
+
+const { isProduction } = globals;
 
 const logger = getLogger("redux");
 
@@ -15,26 +19,25 @@ export default function () {
   });
 
   const initialState = {};
-
   const reducers = {
     app: (state = {}) => state,
   };
   const sagas: any[] = [];
   const middleware = applyMiddleware(...[sagaRuntime]);
 
-  logger.debug("Create redux store");
+  logger.trace("Create redux store");
   const store = createStore(
     combineReducers(reducers),
     initialState,
-    composeWithDevTools(middleware)
+    isProduction ? compose(middleware) : composeWithDevTools(middleware)
   );
-  logger.debug("Redux store created");
+  logger.trace("Redux store created");
 
   // Fire up middlewares
-  logger.debug("Fire up sagas");
+  logger.trace("Fire up sagas");
   sagaRuntime.run(function* () {
     yield all(sagas.map((saga) => spawn(saga)));
   });
-  logger.debug("Sagas are fired up");
+  logger.debug("Redux store is set up   ");
   return store;
 }
