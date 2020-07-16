@@ -13,7 +13,10 @@ function Navigation() {
   return (
     <Navbar bg="light" expand="lg">
       <Navbar.Brand as={Link} to="/">
-        CBR-System
+        <img
+          src="/images/logo/cbr-logo-small.png"
+          alt="Case Based Reasoning Logo"
+        />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
@@ -22,7 +25,7 @@ function Navigation() {
           <Nav.Link as={Link} to="/">
             Home
           </Nav.Link>
-          */}
+           */}
           {/*
           <NavDropdown title="Dropdown" id="basic-nav-dropdown">
             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
