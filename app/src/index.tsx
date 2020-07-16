@@ -10,6 +10,8 @@ import "./styles/index.scss";
 
 import * as serviceWorker from "./serviceWorker";
 
+import Ajax from "./utils/Ajax";
+
 import configureStore from "./configureStore";
 import App from "./App";
 
@@ -23,7 +25,9 @@ ReactDOM.render(
         clientId="m4baaRyqUhaKqAos3T4W24ZGg0FJa4ox"
         redirectUri={window.location.origin}
       >
-        <App />
+        <Ajax>
+          <App />
+        </Ajax>
       </Auth0Provider>
     </Provider>
   </React.StrictMode>,
