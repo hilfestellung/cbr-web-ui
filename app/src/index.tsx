@@ -16,6 +16,9 @@ import SagaContextMaintenance from "./utils/SagaContextMaintenance";
 import configureStore from "./configureStore";
 import App from "./App";
 import { SearchConfig } from "./modules/search";
+import globals from "./globals";
+
+const { apiBaseUrl } = globals;
 
 const searchConfig: SearchConfig = {
   location: {
@@ -24,7 +27,12 @@ const searchConfig: SearchConfig = {
 };
 
 const history = createBrowserHistory();
-const sagaContext = { authentication: {}, history, searchConfig };
+const sagaContext = {
+  apiBaseUrl,
+  authentication: {},
+  history,
+  searchConfig,
+};
 
 const store = configureStore(sagaContext);
 

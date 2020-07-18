@@ -2,7 +2,7 @@ import getLogger, { LoggerLevel } from "./utils/logger";
 
 import globals from "./globals";
 
-const { isProduction, version, clientId } = globals;
+const { isProduction, version, clientId, apiBaseUrl } = globals;
 
 const logger = getLogger("root", {
   level: isProduction ? LoggerLevel.Debug : LoggerLevel.Trace,
@@ -13,6 +13,7 @@ logger.info(
   version,
   "in",
   isProduction ? "production" : "development",
-  "mode."
+  "mode with access to the API via",
+  apiBaseUrl
 );
 logger.info("Your client ID:", clientId);

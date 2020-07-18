@@ -9,6 +9,7 @@ if (clientId == null) {
   setLocalItem("client_id", clientId);
 }
 export default {
+  apiBaseUrl: process.env.REACT_APP_API_BASE_URL,
   isProduction: process.env.NODE_ENV === "production",
   version: process.env.REACT_APP_VERSION,
   clientId,

@@ -39,20 +39,18 @@ function* searchSaga({ payload: { location } }: any) {
         return;
       }
     }
+    const apiBaseUrl = yield getContext("apiBaseUrl");
     const query = Object.fromEntries(new URLSearchParams(location.search));
     logger.debug("Start new search", query);
 
     logger.trace("Requesting ID token");
     const idToken = (yield call([authentication, "getIdTokenClaims"])).__raw;
     logger.trace("Search using id token");
-    const response: Response = yield fetch(
-      "https://api.case-based-reasoning.org/",
-      {
-        headers: {
-          Authorization: "Bearer " + idToken,
-        },
-      }
-    );
+    const response: Response = yield fetch(`${apiBaseUrl}/`, {
+      headers: {
+        Authorization: "Bearer " + idToken,
+      },
+    });
     logger.trace("Search is done. Parse response.");
     const json = yield response.json();
     logger.trace("Response is parsed");

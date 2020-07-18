@@ -56,7 +56,7 @@ function Search() {
             type="text"
             placeholder="Enter your mileage"
             onChange={changeInput("miles")}
-            value={newQuery["miles"] || {}}
+            value={newQuery["miles"] || ""}
           />
           <Form.Text className="text-muted">
             We'll never share your mileage with anyone else.
