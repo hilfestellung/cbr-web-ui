@@ -1,11 +1,21 @@
 import { eventChannel, EventChannel } from "redux-saga";
 import { getContext, take, put } from "redux-saga/effects";
-import { History } from "history";
+import { History, Location } from "history";
 
 import getLogger from "../../utils/logger";
 import { LocationAction } from "./actions";
 
 const logger = getLogger("location");
+
+function isSameLocation(source: Location, target: Location) {
+  return (
+    source &&
+    target &&
+    source.pathname === target.pathname &&
+    source.search === target.search &&
+    source.hash === target.hash
+  );
+}
 
 function createHistoryChannel(history: History): EventChannel<unknown> {
   return eventChannel((emit) => {
@@ -29,12 +39,16 @@ function createHistoryChannel(history: History): EventChannel<unknown> {
 export function* watchLocation() {
   const history: History = yield getContext("history");
   const historyChannel = createHistoryChannel(history);
+  let persistLocation: Location = {} as Location<History.PoorMansUnknown>;
   while (true) {
     try {
       const event = yield take(historyChannel);
       logger.debug("Event", event);
       const [location, action] = event;
-      yield put(LocationAction.locationChanged(action, location));
+      if (!isSameLocation(location, persistLocation)) {
+        yield put(LocationAction.locationChanged(action, location));
+      }
+      persistLocation = location;
     } catch (error) {
       logger.error("Error listening to history", error);
     }
