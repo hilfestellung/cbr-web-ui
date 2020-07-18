@@ -8,13 +8,14 @@ import { LocationAction } from "./actions";
 const logger = getLogger("location");
 
 function isSameLocation(source: Location, target: Location) {
-  return (
+  const result =
     source &&
     target &&
     source.pathname === target.pathname &&
     source.search === target.search &&
-    source.hash === target.hash
-  );
+    source.hash === target.hash;
+  logger.trace("Is same", result, "-", source, target);
+  return result;
 }
 
 function createHistoryChannel(history: History): EventChannel<unknown> {
