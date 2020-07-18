@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
+// import FormControl from "react-bootstrap/FormControl";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 // import NavDropdown from "react-bootstrap/NavDropdown";
@@ -62,6 +62,10 @@ function Navigation() {
             <Spinner animation="border" />
           ) : isAuthenticated ? (
             <>
+              <Navbar.Text className="mr-3">
+                {t("Signed in as")}{" "}
+                <span className="text-info">{user.name}</span>
+              </Navbar.Text>
               <Button
                 variant="outline-secondary"
                 onClick={() =>

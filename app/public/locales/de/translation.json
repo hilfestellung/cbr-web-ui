@@ -1,4 +1,6 @@
 {
   "Login": "Anmelden",
-  "Logout": "Abmelden"
+  "Logout": "Abmelden",
+  "Signed in as": "Angemeldet als",
+  "Search": "Suchen"
 }

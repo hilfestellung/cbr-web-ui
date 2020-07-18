@@ -1,4 +1,6 @@
 {
   "Login": "Login",
-  "Logout": "Logout"
+  "Logout": "Logout",
+  "Signed in as": "Signed in as",
+  "Search": "Search"
 }
