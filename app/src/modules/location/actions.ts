@@ -5,7 +5,7 @@ const LOCATION_CHANGED = "[Location] Changed";
 
 const locationChanged = createAction(
   LOCATION_CHANGED,
-  (action: string, location: Location) => ({ action, l: location })
+  (action: string, location: Location) => ({ action, location })
 );
 
 export const LocationActionType = {

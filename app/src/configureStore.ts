@@ -7,7 +7,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import getLogger from "./utils/logger";
 
 import globals from "./globals";
-import { watchSearchActions } from "./modules/search";
+import { searchReducer, watchSearchActions } from "./modules/search";
 import { Auth0ContextInterface } from "@auth0/auth0-react";
 import { watchLocation } from "./modules/location";
 
@@ -25,11 +25,19 @@ export default function (context: any) {
     context,
   });
 
+  // Initial state
   const initialState = {};
+
+  // Reducer definition
   const reducers = {
     app: (state = {}) => state,
+    search: searchReducer,
   };
+
+  // Saga definition
   const sagas: any[] = [watchLocation, watchSearchActions];
+
+  // Middleware definition
   const middleware = applyMiddleware(...[sagaRuntime]);
 
   logger.trace("Create redux store");

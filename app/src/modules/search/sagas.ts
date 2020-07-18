@@ -1,6 +1,10 @@
-import { takeEvery, getContext, call } from "redux-saga/effects";
-import { SearchAction } from "./actions";
+import { takeEvery, getContext, call, put, select } from "redux-saga/effects";
 import getLogger from "../../utils/logger";
+import { waitForCondition } from "../../utils/sagas";
+import { LocationUtils } from "../location/utils";
+
+import { SearchAction } from "./actions";
+import { SearchSelector } from "./selectors";
 
 const logger = getLogger("search");
 
@@ -8,24 +12,72 @@ export interface SearchConfig {
   location: { path?: string; pattern?: RegExp };
 }
 
-function* searchSaga() {
-  const authentication = yield getContext("authentication");
+function* searchSaga({ payload: { location } }: any) {
+  if (yield select(SearchSelector.isSearching)) {
+    logger.warn("Already searching, ignoring request");
+    return;
+  }
+  try {
+    logger.trace("Entering search");
+    const authentication = yield getContext("authentication");
 
-  const idToken = (yield call([authentication, "getIdTokenClaims"])).__raw;
-  logger.debug("Search using id token", idToken);
-  const response: Response = yield call(
-    fetch,
-    "https://api.case-based-reasoning.org/",
-    {
-      headers: {
-        Authorization: "Bearer " + idToken,
-      },
+    if (!authentication.isAuthenticated) {
+      logger.debug("Application not authenticated");
+      const success = yield call(
+        waitForCondition,
+        () => authentication.isAuthenticated
+      );
+      if (!success) {
+        yield put(
+          SearchAction.searchFailed(
+            new Error("Application is not authenticated")
+          )
+        );
+        return;
+      }
     }
-  );
-  logger.debug("Response data", yield response.json());
+    const query = Object.fromEntries(new URLSearchParams(location.search));
+    logger.debug("Start new search", query);
+
+    logger.trace("Requesting ID token");
+    const idToken = (yield call([authentication, "getIdTokenClaims"])).__raw;
+    logger.trace("Search using id token", idToken);
+    const response: Response = yield call(
+      fetch,
+      "https://api.case-based-reasoning.org/",
+      {
+        headers: {
+          Authorization: "Bearer " + idToken,
+        },
+      }
+    );
+    logger.trace("Search is done. Parse response.");
+    const json = yield response.json();
+    logger.trace("Response is parsed");
+    if (response.status > 399) {
+      logger.error("Search response is errornous", json);
+      yield put(SearchAction.searchFailed(json));
+    } else {
+      logger.debug("Search response data", json);
+      yield put(SearchAction.searchSuccess(json));
+    }
+  } catch (err) {
+    logger.error("Error while executing search", err);
+    yield put(SearchAction.searchFailed(err));
+  } finally {
+    logger.trace("Search is done");
+  }
 }
 
 export function* watchSearchActions() {
+  logger.debug("Setup search action watcher");
   const searchConfig: SearchConfig = yield getContext("searchConfig");
+  const { path, pattern } = searchConfig.location || {};
+  yield takeEvery(
+    LocationUtils.createSagaTakePattern({ path, pattern }),
+    searchSaga
+  );
   yield takeEvery(SearchAction.search, searchSaga);
+
+  logger.debug("Setup search action watcher - done.");
 }

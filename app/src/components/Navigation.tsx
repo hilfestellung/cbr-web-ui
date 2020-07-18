@@ -1,17 +1,26 @@
 import React from "react";
 
+import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { useAuth0 } from "@auth0/auth0-react";
 // import NavDropdown from "react-bootstrap/NavDropdown";
+import Spinner from "react-bootstrap/Spinner";
 
 function Navigation() {
-  const { isAuthenticated, user, loginWithRedirect, logout } = useAuth0();
+  const {
+    isAuthenticated,
+    isLoading,
+    user,
+    loginWithRedirect,
+    logout,
+  } = useAuth0();
+  const { t } = useTranslation();
   return (
     <Navbar bg="light" expand="lg">
       <Navbar.Brand as={Link} to="/">
@@ -24,10 +33,14 @@ function Navigation() {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="mr-auto">
           {/*
-          <Nav.Link as={Link} to="/">
-            Home
-          </Nav.Link>
            */}
+          {isAuthenticated && (
+            <>
+              <Nav.Link as={Link} to="/search">
+                {t("Search")}
+              </Nav.Link>
+            </>
+          )}
           {/*
           <NavDropdown title="Dropdown" id="basic-nav-dropdown">
             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
@@ -45,7 +58,9 @@ function Navigation() {
         {/*
          */}
         <Form inline>
-          {isAuthenticated ? (
+          {isLoading ? (
+            <Spinner animation="border" />
+          ) : isAuthenticated ? (
             <>
               <Button
                 variant="outline-secondary"
@@ -53,12 +68,12 @@ function Navigation() {
                   logout({ returnTo: window.location.origin + "/logout" })
                 }
               >
-                Abmelden
+                {t("Logout")}
               </Button>
             </>
           ) : (
             <Button variant="primary" onClick={() => loginWithRedirect()}>
-              Anmelden
+              {t("Login")}
             </Button>
           )}
         </Form>

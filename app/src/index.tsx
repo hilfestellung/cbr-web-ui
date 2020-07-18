@@ -1,17 +1,17 @@
 import "./errorhandler";
+import "./i18n";
 
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { createBrowserHistory } from "history";
 
-// import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/index.scss";
 
 import * as serviceWorker from "./serviceWorker";
 
-import Ajax from "./utils/Ajax";
+import SagaContextMaintenance from "./utils/SagaContextMaintenance";
 
 import configureStore from "./configureStore";
 import App from "./App";
@@ -30,17 +30,18 @@ const store = configureStore(sagaContext);
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <Auth0Provider
-        domain="cdein.eu.auth0.com"
-        clientId="m4baaRyqUhaKqAos3T4W24ZGg0FJa4ox"
-        redirectUri={window.location.origin}
-      >
-        <Ajax context={sagaContext}>
+    <Suspense fallback={<div>Loading</div>}>
+      <Provider store={store}>
+        <Auth0Provider
+          domain="cdein.eu.auth0.com"
+          clientId="m4baaRyqUhaKqAos3T4W24ZGg0FJa4ox"
+          redirectUri={window.location.origin}
+        >
+          <SagaContextMaintenance context={sagaContext} />
           <App history={history} />
-        </Ajax>
-      </Auth0Provider>
-    </Provider>
+        </Auth0Provider>
+      </Provider>
+    </Suspense>
   </React.StrictMode>,
   document.getElementById("root")
 );

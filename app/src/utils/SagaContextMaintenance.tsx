@@ -1,13 +1,11 @@
-import React, { useCallback, useContext, useEffect } from "react";
-import globals from "../globals";
+import { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 
-export const AjaxContext = React.createContext<any>({
-  get: () => Promise.reject(new Error("Unauthorized")),
-});
-export const useAjax = () => useContext(AjaxContext);
+export interface SagaContextMaintenanceOptions {
+  context: any;
+}
 
-function Ajax({ children, context }: any) {
+function SagaContextMaintenance({ context }: SagaContextMaintenanceOptions) {
   const auth = useAuth0();
 
   useEffect(() => {
@@ -27,7 +25,7 @@ function Ajax({ children, context }: any) {
     }
   }, [auth, context]);
 
-  return <AjaxContext.Provider value={{}}>{children};</AjaxContext.Provider>;
+  return null;
 }
 
-export default Ajax;
+export default SagaContextMaintenance;

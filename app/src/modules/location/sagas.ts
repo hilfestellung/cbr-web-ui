@@ -16,8 +16,8 @@ function createHistoryChannel(history: History): EventChannel<unknown> {
       logger.trace("Emitted event", event);
     });
     setTimeout(() => {
-      emit([history.location, "PUSH"]);
-    }, 0);
+      emit([window.location, "INIT"]);
+    }, 500);
     return () => {
       // Finally
       unlisten();
