@@ -4,6 +4,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { createBrowserHistory } from "history";
 
 // import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/index.scss";
@@ -14,8 +15,18 @@ import Ajax from "./utils/Ajax";
 
 import configureStore from "./configureStore";
 import App from "./App";
+import { SearchConfig } from "./modules/search";
 
-const store = configureStore();
+const searchConfig: SearchConfig = {
+  location: {
+    path: "/search",
+  },
+};
+
+const history = createBrowserHistory();
+const sagaContext = { authentication: {}, history, searchConfig };
+
+const store = configureStore(sagaContext);
 
 ReactDOM.render(
   <React.StrictMode>
@@ -25,8 +36,8 @@ ReactDOM.render(
         clientId="m4baaRyqUhaKqAos3T4W24ZGg0FJa4ox"
         redirectUri={window.location.origin}
       >
-        <Ajax>
-          <App />
+        <Ajax context={sagaContext}>
+          <App history={history} />
         </Ajax>
       </Auth0Provider>
     </Provider>
