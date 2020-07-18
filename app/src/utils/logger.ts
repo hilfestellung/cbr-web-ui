@@ -58,6 +58,26 @@ export class Logger {
     return level <= this.config.level;
   }
 
+  isErrorEnabled() {
+    return LoggerLevel.Error <= this.config.level;
+  }
+
+  isWarnEnabled() {
+    return LoggerLevel.Warn <= this.config.level;
+  }
+
+  isInfoEnabled() {
+    return LoggerLevel.Info <= this.config.level;
+  }
+
+  isDebugEnabled() {
+    return LoggerLevel.Debug <= this.config.level;
+  }
+
+  isTraceEnabled() {
+    return LoggerLevel.Trace <= this.config.level;
+  }
+
   error(...args: any[]) {
     this.doLog(LoggerLevel.Error, args);
   }
@@ -68,6 +88,10 @@ export class Logger {
 
   info(...args: any[]) {
     this.doLog(LoggerLevel.Info, args);
+  }
+
+  log(...args: any[]) {
+    this.doLog(LoggerLevel.Debug, args);
   }
 
   debug(...args: any[]) {

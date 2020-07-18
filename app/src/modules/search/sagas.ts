@@ -22,10 +22,13 @@ function* searchSaga({ payload: { location } }: any) {
     const authentication = yield getContext("authentication");
 
     if (!authentication.isAuthenticated) {
-      logger.debug("Application not authenticated");
+      logger.debug(
+        "Application not authenticated. Postpone search until application is authenticated."
+      );
       const success = yield call(
         waitForCondition,
-        () => authentication.isAuthenticated
+        () => authentication.isAuthenticated,
+        -1 // Inifinite wait
       );
       if (!success) {
         yield put(
@@ -41,9 +44,8 @@ function* searchSaga({ payload: { location } }: any) {
 
     logger.trace("Requesting ID token");
     const idToken = (yield call([authentication, "getIdTokenClaims"])).__raw;
-    logger.trace("Search using id token", idToken);
-    const response: Response = yield call(
-      fetch,
+    logger.trace("Search using id token");
+    const response: Response = yield fetch(
       "https://api.case-based-reasoning.org/",
       {
         headers: {

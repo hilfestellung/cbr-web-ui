@@ -9,7 +9,7 @@ export interface LocationState {
   location: Location;
 }
 
-export default handleActions<LocationState>(
+export const locationReducer = handleActions<LocationState>(
   {
     [LocationActionType.LOCATION_CHANGED]: (
       state,

@@ -7,9 +7,9 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import getLogger from "./utils/logger";
 
 import globals from "./globals";
+import { watchLocation, locationReducer } from "./modules/location";
 import { searchReducer, watchSearchActions } from "./modules/search";
 import { Auth0ContextInterface } from "@auth0/auth0-react";
-import { watchLocation } from "./modules/location";
 
 const { isProduction } = globals;
 
@@ -32,6 +32,7 @@ export default function (context: any) {
   const reducers = {
     app: (state = {}) => state,
     search: searchReducer,
+    location: locationReducer,
   };
 
   // Saga definition
