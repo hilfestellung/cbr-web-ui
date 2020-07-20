@@ -1,8 +1,10 @@
 import React from "react";
 import { withAuthenticationRequired } from "@auth0/auth0-react";
-import { RouteProps } from "react-router-dom";
+import { RouteProps, Route } from "react-router-dom";
 
-const PrivateRoute = ({ children, ...props }: RouteProps) => children;
+const PrivateRoute = ({ children, ...props }: RouteProps) => (
+  <Route {...props}>{children}</Route>
+);
 
 export default withAuthenticationRequired<RouteProps>(
   PrivateRoute as React.ComponentType,

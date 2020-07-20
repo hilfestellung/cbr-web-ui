@@ -12,6 +12,7 @@ import { watchBasicActions, basicReducer, BasicActions } from "./modules/basic";
 import { watchLocation, locationReducer } from "./modules/location";
 import { watchSearchActions, searchReducer } from "./modules/search";
 import { watchUserActions, userReducer } from "./modules/user";
+import { classesReducer, watchClassesActions } from "./modules/classes";
 
 const { isProduction } = globals;
 
@@ -34,6 +35,7 @@ export default function (context: any) {
   const reducers = {
     app: (state = {}) => state,
     basic: basicReducer,
+    classes: classesReducer,
     user: userReducer,
     search: searchReducer,
     location: locationReducer,
@@ -43,6 +45,7 @@ export default function (context: any) {
   const sagas: any[] = [
     watchBasicActions,
     watchUserActions,
+    watchClassesActions,
     watchLocation,
     watchSearchActions,
   ];

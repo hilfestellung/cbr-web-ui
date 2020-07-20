@@ -1,6 +1,6 @@
 import { getContext, put, call, takeEvery, select } from "redux-saga/effects";
 import { waitForCondition } from "../../utils/sagas";
-import { UserAction, UserActionTypes } from "./actions";
+import { UserAction, UserActionType } from "./actions";
 import { UserSelector } from "./selectors";
 
 function* setItemSaga({ payload: { name, value } }: any) {
@@ -36,7 +36,7 @@ function* removeItemSaga({ payload: { name } }: any) {
 
   const idToken = (yield call([authentication, "getIdTokenClaims"])).__raw;
   const response: Response = yield fetch(`${apiBaseUrl}/me`, {
-    method: "POST",
+    method: "PUT",
     headers: {
       Authorization: "Bearer " + idToken,
     },
@@ -51,8 +51,8 @@ function* removeItemSaga({ payload: { name } }: any) {
 }
 
 export function* watchUserActions() {
-  yield takeEvery(UserActionTypes.USER_SET_ITEM, setItemSaga);
-  yield takeEvery(UserActionTypes.USER_REMOVE_ITEM, removeItemSaga);
+  yield takeEvery(UserActionType.USER_SET_ITEM, setItemSaga);
+  yield takeEvery(UserActionType.USER_REMOVE_ITEM, removeItemSaga);
   const apiBaseUrl = yield getContext("apiBaseUrl");
   const authentication = yield getContext("authentication");
   let state = false;

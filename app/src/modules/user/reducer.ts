@@ -1,5 +1,5 @@
 import { handleActions } from "redux-actions";
-import { UserActionTypes } from "./actions";
+import { UserActionType } from "./actions";
 
 export interface UserState {
   isAuthenticated: boolean;
@@ -14,7 +14,7 @@ export interface UserState {
 
 export const userReducer = handleActions(
   {
-    [UserActionTypes.USER_AUTHENTICATED]: (
+    [UserActionType.USER_AUTHENTICATED]: (
       state,
       { payload: { isAuthenticated, user } }
     ) => ({
@@ -22,10 +22,7 @@ export const userReducer = handleActions(
       user,
       isAuthenticated,
     }),
-    [UserActionTypes.USER_SET_ITEM_SUCCESS]: (
-      state,
-      { payload: { user } }
-    ) => ({
+    [UserActionType.USER_SET_ITEM_SUCCESS]: (state, { payload: { user } }) => ({
       ...state,
       user,
     }),

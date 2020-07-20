@@ -4,3 +4,33 @@
 @import "~bootstrap/scss/bootstrap";
 
 @import "./footer/index.scss";
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+.full-height {
+}
+
+.workspace {
+  width: 100%;
+  overflow: hidden;
+  margin: 0;
+  .left {
+    overflow-y: auto;
+    height: calc(100vh - 74px);
+    margin: 0;
+  }
+  .right {
+    overflow-y: auto;
+    height: calc(100vh - 74px);
+    margin: 0;
+  }
+  .content {
+    overflow-y: auto;
+    height: calc(100vh - 74px);
+    margin: 0;
+  }
+}

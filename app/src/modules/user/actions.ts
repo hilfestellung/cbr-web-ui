@@ -52,7 +52,7 @@ export const UserAction = {
   userRemoveItemFailed,
 };
 
-export const UserActionTypes = {
+export const UserActionType = {
   USER_AUTHENTICATED,
   USER_SET_ITEM,
   USER_SET_ITEM_SUCCESS,

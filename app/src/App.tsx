@@ -12,6 +12,7 @@ import Impressum from "./pages/privacy/Impressum";
 
 // Private Routes
 import Search from "./pages/search/Search";
+import Classes from "./pages/editor/Classes";
 
 function App({ history }: any) {
   return (
@@ -22,6 +23,12 @@ function App({ history }: any) {
          */}
         <PrivateRoute path="/search">
           <Search />
+        </PrivateRoute>
+        <PrivateRoute path="/editor">
+          <Classes />
+        </PrivateRoute>
+        <PrivateRoute path="/editor/class/:classId">
+          <Classes />
         </PrivateRoute>
         {/* Public Routes
          */}

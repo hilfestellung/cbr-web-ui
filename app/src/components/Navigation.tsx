@@ -39,6 +39,9 @@ function Navigation() {
               <Nav.Link as={Link} to="/search">
                 {t("Search")}
               </Nav.Link>
+              <Nav.Link as={Link} to="/editor">
+                {t("Editor")}
+              </Nav.Link>
             </>
           )}
           {/*
