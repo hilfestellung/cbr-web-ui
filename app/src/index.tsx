@@ -5,13 +5,10 @@ import React, { Suspense } from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { Auth0Provider } from "@auth0/auth0-react";
-import { createBrowserHistory } from "history";
 
 import "./styles/index.scss";
 
 import * as serviceWorker from "./serviceWorker";
-
-import SagaContextMaintenance from "./utils/SagaContextMaintenance";
 
 import configureStore from "./configureStore";
 import App from "./App";
@@ -26,11 +23,10 @@ const searchConfig: SearchConfig = {
   },
 };
 
-const history = createBrowserHistory();
 const sagaContext = {
   apiBaseUrl,
   authentication: {},
-  history,
+  router: {},
   searchConfig,
 };
 
@@ -45,8 +41,7 @@ ReactDOM.render(
           clientId="m4baaRyqUhaKqAos3T4W24ZGg0FJa4ox"
           redirectUri={window.location.origin}
         >
-          <SagaContextMaintenance context={sagaContext} />
-          <App history={history} />
+          <App sagaContext={sagaContext} />
         </Auth0Provider>
       </Provider>
     </Suspense>

@@ -26,7 +26,8 @@ export const locationReducer = handleActions<LocationState>(
       pathname: location.pathname,
       search: location.search,
       hash: location.hash,
-      state: undefined,
+      state: null,
+      key: "",
     },
   }
 );

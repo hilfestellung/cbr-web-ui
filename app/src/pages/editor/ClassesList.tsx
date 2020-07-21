@@ -22,7 +22,7 @@ import Icon from "../../components/Icon";
 
 function ClassesList() {
   const dispatch = useDispatch();
-  const { classid = "Mileage" } = useParams();
+  const { id: classid } = useParams();
 
   const isLoading = useSelector(ClassesSelector.isLoading);
   const items = useSelector(ClassesSelector.getItems);
@@ -45,8 +45,8 @@ function ClassesList() {
         </Alert>
       ) : (
         <ListGroup>
-          {items.map((item: any) => {
-            const isActive = item.id === classid;
+          {items.map((item: any, index) => {
+            const isActive = item.id === classid || (!classid && index === 0);
             return (
               <ListGroup.Item
                 key={item.id}

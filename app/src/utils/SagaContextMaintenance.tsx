@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useHistory } from "react-router-dom";
 
 export interface SagaContextMaintenanceOptions {
   context: any;
@@ -7,6 +8,7 @@ export interface SagaContextMaintenanceOptions {
 
 function SagaContextMaintenance({ context }: SagaContextMaintenanceOptions) {
   const auth = useAuth0();
+  const history = useHistory();
 
   useEffect(() => {
     if (auth) {
@@ -23,7 +25,15 @@ function SagaContextMaintenance({ context }: SagaContextMaintenanceOptions) {
         target[key] = source[key];
       });
     }
-  }, [auth, context]);
+    if (history) {
+      const router = context.router;
+      router.history = history;
+      console.log("History", history, router, context);
+    }
+    console.log("Set history", history);
+  }, [history, auth, context]);
+
+  useEffect(() => {}, [context]);
 
   return null;
 }

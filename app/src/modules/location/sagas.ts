@@ -1,9 +1,10 @@
 import { eventChannel, EventChannel } from "redux-saga";
-import { getContext, take, put } from "redux-saga/effects";
+import { getContext, take, put, call } from "redux-saga/effects";
 import { History, Location } from "history";
 
 import getLogger from "../../utils/logger";
 import { LocationAction } from "./actions";
+import { waitForCondition } from "../../utils/sagas";
 
 const logger = getLogger("location");
 
@@ -38,9 +39,11 @@ function createHistoryChannel(history: History): EventChannel<unknown> {
 }
 
 export function* watchLocation() {
-  const history: History = yield getContext("history");
+  const router = yield getContext("router");
+  yield call(waitForCondition, () => router.history != null, -1);
+  const history: History = router.history;
   const historyChannel = createHistoryChannel(history);
-  let persistLocation: Location = {} as Location<History.PoorMansUnknown>;
+  let persistLocation: Location = {} as any;
   while (true) {
     try {
       const event = yield take(historyChannel);

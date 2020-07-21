@@ -1,5 +1,5 @@
 import React from "react";
-import { Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import Navigation from "./components/Navigation";
 
@@ -13,10 +13,12 @@ import Impressum from "./pages/privacy/Impressum";
 // Private Routes
 import Search from "./pages/search/Search";
 import Classes from "./pages/editor/Classes";
+import SagaContextMaintenance from "./utils/SagaContextMaintenance";
 
-function App({ history }: any) {
+function App({ sagaContext }: any) {
   return (
-    <Router history={history}>
+    <Router>
+      <SagaContextMaintenance context={sagaContext} />
       <Navigation />
       <Switch>
         {/* Private Routes
@@ -24,10 +26,10 @@ function App({ history }: any) {
         <PrivateRoute path="/search">
           <Search />
         </PrivateRoute>
-        <PrivateRoute path="/editor">
+        <PrivateRoute path="/editor/class/:id">
           <Classes />
         </PrivateRoute>
-        <PrivateRoute path="/editor/class/:classId">
+        <PrivateRoute path="/editor">
           <Classes />
         </PrivateRoute>
         {/* Public Routes

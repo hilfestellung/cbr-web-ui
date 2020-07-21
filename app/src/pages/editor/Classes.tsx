@@ -3,16 +3,21 @@ import React from "react";
 import Workspace from "../../components/layout/Workspace";
 
 import ClassesList from "./ClassesList";
-import { useParams } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
+import ClassEditor from "./ClassEditor";
 
 function Classes() {
-  const pa = useParams();
-  console.log("Classes Class ID:", pa);
   return (
     <Workspace
       left={<ClassesList />}
-      right={<div>Hallo Rechts</div>}
-      content={<div>Content Hallo</div>}
+      right={<div>Content Hallo</div>}
+      content={
+        <Switch>
+          <Route path="/editor/class/:id">
+            <ClassEditor />
+          </Route>
+        </Switch>
+      }
     ></Workspace>
   );
 }
