@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { ClassesSelector } from "../../modules/classes";
+import SimplePage from "../../components/layout/SimplePage";
+import AggregateEditor from "./AggregateEditor";
 
 function ClassEditor() {
   const { id } = useParams();
@@ -18,9 +20,11 @@ function ClassEditor() {
 
   if (modelClass) {
     return (
-      <div>
-        {modelClass.id} ({modelClass.type})
-      </div>
+      <SimplePage>
+        {modelClass.type === "aggregate" ? (
+          <AggregateEditor aggregate={modelClass} />
+        ) : null}
+      </SimplePage>
     );
   }
   return null;
