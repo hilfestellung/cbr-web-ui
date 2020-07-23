@@ -1,5 +1,5 @@
-import React from "react";
-import SimplePage from "../../components/layout/SimplePage";
+import React from 'react';
+import SimplePage from '../../components/layout/SimplePage';
 
 function Impressum() {
   return (
@@ -17,7 +17,7 @@ function Impressum() {
       <p>
         Telefon: +49 (0)1794480558
         <br />
-        E-Mail:{" "}
+        E-Mail:{' '}
         <a href="mailto:christian.dein@dein-hosting.de">
           christian.dein@dein-hosting.de
         </a>
@@ -25,7 +25,7 @@ function Impressum() {
       <h2>EU-Streitschlichtung</h2>
       <p>
         Die Europ&auml;ische Kommission stellt eine Plattform zur
-        Online-Streitbeilegung (OS) bereit:{" "}
+        Online-Streitbeilegung (OS) bereit:{' '}
         <a
           href="https://ec.europa.eu/consumers/odr"
           target="_blank"

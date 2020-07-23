@@ -27,7 +27,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test"
+    "test": "react-scripts test",
+    "preinstall": "export NPM_TOKEN=$(cat ~/.github.token)"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,7 +46,11 @@
     ]
   },
   "devDependencies": {
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-prettier": "^3.1.4",
     "node-sass": "^4.14.1",
+    "prettier": "^2.0.5",
     "redux-devtools-extension": "^2.13.8"
   }
 }

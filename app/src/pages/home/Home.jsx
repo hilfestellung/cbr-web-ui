@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import SimplePage from "../../components/layout/SimplePage";
+import SimplePage from '../../components/layout/SimplePage';
 
 function Home() {
   return (

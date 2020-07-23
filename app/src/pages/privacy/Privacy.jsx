@@ -1,12 +1,12 @@
-import React from "react";
-import SimplePage from "../../components/layout/SimplePage";
+import React from 'react';
+import SimplePage from '../../components/layout/SimplePage';
 
 function Privacy() {
   return (
     <SimplePage>
       <h1>Datenschutzerkl&auml;rung</h1>
       <h2>1. Datenschutz auf einen Blick</h2>
-      <h3>Allgemeine Hinweise</h3>{" "}
+      <h3>Allgemeine Hinweise</h3>{' '}
       <p>
         Die folgenden Hinweise geben einen einfachen &Uuml;berblick
         dar&uuml;ber, was mit Ihren personenbezogenen Daten passiert, wenn Sie
@@ -15,43 +15,43 @@ function Privacy() {
         Ausf&uuml;hrliche Informationen zum Thema Datenschutz entnehmen Sie
         unserer unter diesem Text aufgef&uuml;hrten Datenschutzerkl&auml;rung.
       </p>
-      <h3>Datenerfassung auf dieser Website</h3>{" "}
+      <h3>Datenerfassung auf dieser Website</h3>{' '}
       <p>
         <strong>
           Wer ist verantwortlich f&uuml;r die Datenerfassung auf dieser Website?
         </strong>
-      </p>{" "}
+      </p>{' '}
       <p>
         Die Datenverarbeitung auf dieser Website erfolgt durch den
         Websitebetreiber. Dessen Kontaktdaten k&ouml;nnen Sie dem Impressum
         dieser Website entnehmen.
-      </p>{" "}
+      </p>{' '}
       <p>
         <strong>Wie erfassen wir Ihre Daten?</strong>
-      </p>{" "}
+      </p>{' '}
       <p>
         Ihre Daten werden zum einen dadurch erhoben, dass Sie uns diese
         mitteilen. Hierbei kann es sich z.&nbsp;B. um Daten handeln, die Sie in
         ein Kontaktformular eingeben.
-      </p>{" "}
+      </p>{' '}
       <p>
         Andere Daten werden automatisch beim Besuch der Website durch unsere
         IT-Systeme erfasst. Das sind vor allem technische Daten (z.&nbsp;B.
         Internetbrowser, Betriebssystem oder Uhrzeit des Seitenaufrufs). Die
         Erfassung dieser Daten erfolgt automatisch, sobald Sie diese Website
         betreten.
-      </p>{" "}
+      </p>{' '}
       <p>
         <strong>Wof&uuml;r nutzen wir Ihre Daten?</strong>
-      </p>{" "}
+      </p>{' '}
       <p>
         Ein Teil der Daten wird erhoben, um eine fehlerfreie Bereitstellung der
         Website zu gew&auml;hrleisten. Andere Daten k&ouml;nnen zur Analyse
         Ihres Nutzerverhaltens verwendet werden.
-      </p>{" "}
+      </p>{' '}
       <p>
         <strong>Welche Rechte haben Sie bez&uuml;glich Ihrer Daten?</strong>
-      </p>{" "}
+      </p>{' '}
       <p>
         Sie haben jederzeit das Recht unentgeltlich Auskunft &uuml;ber Herkunft,
         Empf&auml;nger und Zweck Ihrer gespeicherten personenbezogenen Daten zu
@@ -60,7 +60,7 @@ function Privacy() {
         zum Thema Datenschutz k&ouml;nnen Sie sich jederzeit unter der im
         Impressum angegebenen Adresse an uns wenden. Des Weiteren steht Ihnen
         ein Beschwerderecht bei der zust&auml;ndigen Aufsichtsbeh&ouml;rde zu.
-      </p>{" "}
+      </p>{' '}
       <p>
         Au&szlig;erdem haben Sie das Recht, unter bestimmten Umst&auml;nden die
         Einschr&auml;nkung der Verarbeitung Ihrer personenbezogenen Daten zu
@@ -68,7 +68,7 @@ function Privacy() {
         unter &bdquo;Recht auf Einschr&auml;nkung der Verarbeitung&ldquo;.
       </p>
       <h2>2. Hosting</h2>
-      <h3>Externes Hosting</h3>{" "}
+      <h3>Externes Hosting</h3>{' '}
       <p>
         Diese Website wird bei einem externen Dienstleister gehostet (Hoster).
         Personenbezogenen Daten, die auf dieser Website erfasst werden, werden
@@ -76,27 +76,27 @@ function Privacy() {
         IP-Adressen, Kontaktanfragen, Meta- und Kommunikationsdaten,
         Vertragsdaten, Kontaktdaten, Namen, Webseitenzugriffe und sonstige
         Daten, die &uuml;ber eine Website generiert werden, handeln.
-      </p>{" "}
+      </p>{' '}
       <p>
         Der Einsatz des Hosters erfolgt zum Zwecke der Vertragserf&uuml;llung
         gegen&uuml;ber unseren potenziellen und bestehenden Kunden (Art. 6 Abs.
         1 lit. b DSGVO) und im Interesse einer sicheren, schnellen und
         effizienten Bereitstellung unseres Online-Angebots durch einen
         professionellen Anbieter (Art. 6 Abs. 1 lit. f DSGVO).
-      </p>{" "}
+      </p>{' '}
       <p>
         Unser Hoster wird Ihre Daten nur insoweit verarbeiten, wie dies zur
         Erf&uuml;llung seiner Leistungspflichten erforderlich ist und unsere
         Weisungen in Bezug auf diese Daten befolgen.
       </p>
       <h2>3. Allgemeine Hinweise und Pflichtinformationen</h2>
-      <h3>Datenschutz</h3>{" "}
+      <h3>Datenschutz</h3>{' '}
       <p>
         Die Betreiber dieser Seiten nehmen den Schutz Ihrer pers&ouml;nlichen
         Daten sehr ernst. Wir behandeln Ihre personenbezogenen Daten vertraulich
         und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser
         Datenschutzerkl&auml;rung.
-      </p>{" "}
+      </p>{' '}
       <p>
         Wenn Sie diese Website benutzen, werden verschiedene personenbezogene
         Daten erhoben. Personenbezogene Daten sind Daten, mit denen Sie
@@ -104,18 +104,18 @@ function Privacy() {
         Datenschutzerkl&auml;rung erl&auml;utert, welche Daten wir erheben und
         wof&uuml;r wir sie nutzen. Sie erl&auml;utert auch, wie und zu welchem
         Zweck das geschieht.
-      </p>{" "}
+      </p>{' '}
       <p>
         Wir weisen darauf hin, dass die Daten&uuml;bertragung im Internet
         (z.&nbsp;B. bei der Kommunikation per E-Mail) Sicherheitsl&uuml;cken
         aufweisen kann. Ein l&uuml;ckenloser Schutz der Daten vor dem Zugriff
         durch Dritte ist nicht m&ouml;glich.
       </p>
-      <h3>Hinweis zur verantwortlichen Stelle</h3>{" "}
+      <h3>Hinweis zur verantwortlichen Stelle</h3>{' '}
       <p>
         Die verantwortliche Stelle f&uuml;r die Datenverarbeitung auf dieser
         Website ist:
-      </p>{" "}
+      </p>{' '}
       <p>
         Christian Dein
         <br />
@@ -134,7 +134,7 @@ function Privacy() {
         der Verarbeitung von personenbezogenen Daten (z.&nbsp;B. Namen,
         E-Mail-Adressen o. &Auml;.) entscheidet.
       </p>
-      <h3>Widerruf Ihrer Einwilligung zur Datenverarbeitung</h3>{" "}
+      <h3>Widerruf Ihrer Einwilligung zur Datenverarbeitung</h3>{' '}
       <p>
         Viele Datenverarbeitungsvorg&auml;nge sind nur mit Ihrer
         ausdr&uuml;cklichen Einwilligung m&ouml;glich. Sie k&ouml;nnen eine
@@ -146,7 +146,7 @@ function Privacy() {
       <h3>
         Widerspruchsrecht gegen die Datenerhebung in besonderen F&auml;llen
         sowie gegen Direktwerbung (Art. 21 DSGVO)
-      </h3>{" "}
+      </h3>{' '}
       <p>
         WENN DIE DATENVERARBEITUNG AUF GRUNDLAGE VON ART. 6 ABS. 1 LIT. E ODER F
         DSGVO ERFOLGT, HABEN SIE JEDERZEIT DAS RECHT, AUS GR&Uuml;NDEN, DIE SICH
@@ -161,7 +161,7 @@ function Privacy() {
         FREIHEITEN &Uuml;BERWIEGEN ODER DIE VERARBEITUNG DIENT DER
         GELTENDMACHUNG, AUS&Uuml;BUNG ODER VERTEIDIGUNG VON
         RECHTSANSPR&Uuml;CHEN (WIDERSPRUCH NACH ART. 21 ABS. 1 DSGVO).
-      </p>{" "}
+      </p>{' '}
       <p>
         WERDEN IHRE PERSONENBEZOGENEN DATEN VERARBEITET, UM DIREKTWERBUNG ZU
         BETREIBEN, SO HABEN SIE DAS RECHT, JEDERZEIT WIDERSPRUCH GEGEN DIE
@@ -172,7 +172,7 @@ function Privacy() {
         MEHR ZUM ZWECKE DER DIREKTWERBUNG VERWENDET (WIDERSPRUCH NACH ART. 21
         ABS. 2 DSGVO).
       </p>
-      <h3>Beschwerderecht bei der zust&auml;ndigen Aufsichtsbeh&ouml;rde</h3>{" "}
+      <h3>Beschwerderecht bei der zust&auml;ndigen Aufsichtsbeh&ouml;rde</h3>{' '}
       <p>
         Im Falle von Verst&ouml;&szlig;en gegen die DSGVO steht den Betroffenen
         ein Beschwerderecht bei einer Aufsichtsbeh&ouml;rde, insbesondere in dem
@@ -181,7 +181,7 @@ function Privacy() {
         Beschwerderecht besteht unbeschadet anderweitiger verwaltungsrechtlicher
         oder gerichtlicher Rechtsbehelfe.
       </p>
-      <h3>Recht auf Daten&uuml;bertragbarkeit</h3>{" "}
+      <h3>Recht auf Daten&uuml;bertragbarkeit</h3>{' '}
       <p>
         Sie haben das Recht, Daten, die wir auf Grundlage Ihrer Einwilligung
         oder in Erf&uuml;llung eines Vertrags automatisiert verarbeiten, an sich
@@ -190,7 +190,7 @@ function Privacy() {
         Daten an einen anderen Verantwortlichen verlangen, erfolgt dies nur,
         soweit es technisch machbar ist.
       </p>
-      <h3>SSL- bzw. TLS-Verschl&uuml;sselung</h3>{" "}
+      <h3>SSL- bzw. TLS-Verschl&uuml;sselung</h3>{' '}
       <p>
         Diese Seite nutzt aus Sicherheitsgr&uuml;nden und zum Schutz der
         &Uuml;bertragung vertraulicher Inhalte, wie zum Beispiel Bestellungen
@@ -199,13 +199,13 @@ function Privacy() {
         Sie daran, dass die Adresszeile des Browsers von &bdquo;http://&ldquo;
         auf &bdquo;https://&ldquo; wechselt und an dem Schloss-Symbol in Ihrer
         Browserzeile.
-      </p>{" "}
+      </p>{' '}
       <p>
         Wenn die SSL- bzw. TLS-Verschl&uuml;sselung aktiviert ist, k&ouml;nnen
         die Daten, die Sie an uns &uuml;bermitteln, nicht von Dritten mitgelesen
         werden.
       </p>
-      <h3>Auskunft, L&ouml;schung und Berichtigung</h3>{" "}
+      <h3>Auskunft, L&ouml;schung und Berichtigung</h3>{' '}
       <p>
         Sie haben im Rahmen der geltenden gesetzlichen Bestimmungen jederzeit
         das Recht auf unentgeltliche Auskunft &uuml;ber Ihre gespeicherten
@@ -215,43 +215,43 @@ function Privacy() {
         personenbezogene Daten k&ouml;nnen Sie sich jederzeit unter der im
         Impressum angegebenen Adresse an uns wenden.
       </p>
-      <h3>Recht auf Einschr&auml;nkung der Verarbeitung</h3>{" "}
+      <h3>Recht auf Einschr&auml;nkung der Verarbeitung</h3>{' '}
       <p>
         Sie haben das Recht, die Einschr&auml;nkung der Verarbeitung Ihrer
         personenbezogenen Daten zu verlangen. Hierzu k&ouml;nnen Sie sich
         jederzeit unter der im Impressum angegebenen Adresse an uns wenden. Das
         Recht auf Einschr&auml;nkung der Verarbeitung besteht in folgenden
         F&auml;llen:
-      </p>{" "}
+      </p>{' '}
       <ul>
-        {" "}
+        {' '}
         <li>
           Wenn Sie die Richtigkeit Ihrer bei uns gespeicherten personenbezogenen
           Daten bestreiten, ben&ouml;tigen wir in der Regel Zeit, um dies zu
           &uuml;berpr&uuml;fen. F&uuml;r die Dauer der Pr&uuml;fung haben Sie
           das Recht, die Einschr&auml;nkung der Verarbeitung Ihrer
           personenbezogenen Daten zu verlangen.
-        </li>{" "}
+        </li>{' '}
         <li>
           Wenn die Verarbeitung Ihrer personenbezogenen Daten
           unrechtm&auml;&szlig;ig geschah/geschieht, k&ouml;nnen Sie statt der
           L&ouml;schung die Einschr&auml;nkung der Datenverarbeitung verlangen.
-        </li>{" "}
+        </li>{' '}
         <li>
           Wenn wir Ihre personenbezogenen Daten nicht mehr ben&ouml;tigen, Sie
           sie jedoch zur Aus&uuml;bung, Verteidigung oder Geltendmachung von
           Rechtsanspr&uuml;chen ben&ouml;tigen, haben Sie das Recht, statt der
           L&ouml;schung die Einschr&auml;nkung der Verarbeitung Ihrer
           personenbezogenen Daten zu verlangen.
-        </li>{" "}
+        </li>{' '}
         <li>
           Wenn Sie einen Widerspruch nach Art. 21 Abs. 1 DSGVO eingelegt haben,
           muss eine Abw&auml;gung zwischen Ihren und unseren Interessen
           vorgenommen werden. Solange noch nicht feststeht, wessen Interessen
           &uuml;berwiegen, haben Sie das Recht, die Einschr&auml;nkung der
           Verarbeitung Ihrer personenbezogenen Daten zu verlangen.
-        </li>{" "}
-      </ul>{" "}
+        </li>{' '}
+      </ul>{' '}
       <p>
         Wenn Sie die Verarbeitung Ihrer personenbezogenen Daten
         eingeschr&auml;nkt haben, d&uuml;rfen diese Daten &ndash; von ihrer
@@ -263,14 +263,14 @@ function Privacy() {
         eines Mitgliedstaats verarbeitet werden.
       </p>
       <h2>4. Datenerfassung auf dieser Website</h2>
-      <h3>Cookies</h3>{" "}
+      <h3>Cookies</h3>{' '}
       <p>
         Die Internetseiten verwenden teilweise so genannte Cookies. Cookies
         richten auf Ihrem Rechner keinen Schaden an und enthalten keine Viren.
         Cookies dienen dazu, unser Angebot nutzerfreundlicher, effektiver und
         sicherer zu machen. Cookies sind kleine Textdateien, die auf Ihrem
         Rechner abgelegt werden und die Ihr Browser speichert.
-      </p>{" "}
+      </p>{' '}
       <p>
         Die meisten der von uns verwendeten Cookies sind so genannte
         &bdquo;Session-Cookies&ldquo;. Sie werden nach Ende Ihres Besuchs
@@ -278,7 +278,7 @@ function Privacy() {
         Endger&auml;t gespeichert bis Sie diese l&ouml;schen. Diese Cookies
         erm&ouml;glichen es uns, Ihren Browser beim n&auml;chsten Besuch
         wiederzuerkennen.
-      </p>{" "}
+      </p>{' '}
       <p>
         Sie k&ouml;nnen Ihren Browser so einstellen, dass Sie &uuml;ber das
         Setzen von Cookies informiert werden und Cookies nur im Einzelfall
@@ -287,7 +287,7 @@ function Privacy() {
         Cookies beim Schlie&szlig;en des Browsers aktivieren. Bei der
         Deaktivierung von Cookies kann die Funktionalit&auml;t dieser Website
         eingeschr&auml;nkt sein.
-      </p>{" "}
+      </p>{' '}
       <p>
         Cookies, die zur Durchf&uuml;hrung des elektronischen
         Kommunikationsvorgangs oder zur Bereitstellung bestimmter, von Ihnen
@@ -299,20 +299,20 @@ function Privacy() {
         (z. B. eine Einwilligung zur Speicherung von Cookies), erfolgt die
         Verarbeitung ausschlie&szlig;lich auf Grundlage von Art. 6 Abs. 1 lit. a
         DSGVO; die Einwilligung ist jederzeit widerrufbar.
-      </p>{" "}
+      </p>{' '}
       <p>
         Soweit andere Cookies (z.&nbsp;B. Cookies zur Analyse Ihres
         Surfverhaltens) gespeichert werden, werden diese in dieser
         Datenschutzerkl&auml;rung gesondert behandelt.
       </p>
-      <h3>Anfrage per E-Mail, Telefon oder Telefax</h3>{" "}
+      <h3>Anfrage per E-Mail, Telefon oder Telefax</h3>{' '}
       <p>
         Wenn Sie uns per E-Mail, Telefon oder Telefax kontaktieren, wird Ihre
         Anfrage inklusive aller daraus hervorgehenden personenbezogenen Daten
         (Name, Anfrage) zum Zwecke der Bearbeitung Ihres Anliegens bei uns
         gespeichert und verarbeitet. Diese Daten geben wir nicht ohne Ihre
         Einwilligung weiter.
-      </p>{" "}
+      </p>{' '}
       <p>
         Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1
         lit. b DSGVO, sofern Ihre Anfrage mit der Erf&uuml;llung eines Vertrags
@@ -322,7 +322,7 @@ function Privacy() {
         DSGVO) und/oder auf unseren berechtigten Interessen (Art. 6 Abs. 1 lit.
         f DSGVO), da wir ein berechtigtes Interesse an der effektiven
         Bearbeitung der an uns gerichteten Anfragen haben.
-      </p>{" "}
+      </p>{' '}
       <p>
         Die von Ihnen an uns per Kontaktanfragen &uuml;bersandten Daten
         verbleiben bei uns, bis Sie uns zur L&ouml;schung auffordern, Ihre

@@ -1,18 +1,17 @@
 import PropTypes from 'prop-types';
-import { Auth0Context } from '@auth0/auth0-react';
 
-export const Children = PropTypes.oneOf(
+export const Children = PropTypes.oneOfType([
   PropTypes.element,
   PropTypes.arrayOf(PropTypes.element),
-  PropTypes.func
-);
+  PropTypes.func,
+]);
 
 export const SearchConfig = PropTypes.shape({
   location: { path: PropTypes.string, pattern: PropTypes.instanceOf(RegExp) },
 });
 
 export const SagaContext = PropTypes.shape({
-  authentication: PropTypes.instanceOf(Auth0Context),
+  authentication: PropTypes.object,
 });
 
 export { default as PropTypes } from 'prop-types';
