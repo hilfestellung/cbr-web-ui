@@ -16,9 +16,30 @@ export const classesReducer = handleActions(
       state,
       { payload: { error } }
     ) => ({ ...state, error, isLoading: false }),
+    [ClassesActionType.PUT_CLASS]: (state) => ({
+      ...state,
+      isSending: true,
+      error: null,
+    }),
+    [ClassesActionType.PUT_CLASS_SUCCESS]: (
+      state,
+      { payload: { modelClass } }
+    ) => ({
+      ...state,
+      items: state.items.map((item) =>
+        item.id === modelClass.id ? modelClass : item
+      ),
+      isSending: false,
+    }),
+    [ClassesActionType.PUT_CLASS_FAILED]: (state, { payload: { error } }) => ({
+      ...state,
+      isSending: false,
+      error: error,
+    }),
   },
   {
     isLoading: false,
+    isSending: false,
     items: [],
     error: undefined,
   }

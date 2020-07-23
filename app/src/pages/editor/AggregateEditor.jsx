@@ -5,12 +5,14 @@ import isEqual from 'lodash/isEqual';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
-import { ClassesSelector } from '../../modules/classes';
+import { ClassesSelector, ClassesAction } from '../../modules/classes';
 import ListEditor from '../../components/ListEditor';
+import { PropTypes } from '../../propTypes';
 
 function AggregateEditor({ aggregate }) {
+  const dispatch = useDispatch();
   const { t } = useTranslation();
 
   const classes = useSelector(ClassesSelector.getItems);
@@ -40,6 +42,23 @@ function AggregateEditor({ aggregate }) {
     [editableAggregate, setEditableAggregate]
   );
 
+  const submitAggregate = useCallback(
+    (event) => {
+      if (event && event.preventDefault) {
+        event.preventDefault();
+      }
+      if (event && event.stopPropagation) {
+        event.stopPropagation();
+      }
+      dispatch(ClassesAction.putClass(editableAggregate));
+    },
+    [editableAggregate, setEditableAggregate]
+  );
+
+  const resetAggregate = useCallback(() => {
+    setEditableAggregate(aggregate);
+  }, [aggregate, setEditableAggregate]);
+
   useEffect(() => {
     setEditableAggregate(aggregate);
   }, [aggregate]);
@@ -51,7 +70,7 @@ function AggregateEditor({ aggregate }) {
   if (editableAggregate) {
     return (
       <div>
-        <Form>
+        <Form onReset={resetAggregate} onSubmit={submitAggregate}>
           <Form.Group controlId="aggregateId">
             <Form.Label>Id</Form.Label>
             <Form.Control
@@ -77,7 +96,7 @@ function AggregateEditor({ aggregate }) {
                       controlId="aggregateId"
                       className="flex-grow-1 mr-2"
                     >
-                      <Form.Control type="text" value={value} disabled />
+                      <Form.Control type="text" value={value} readOnly />
                     </Form.Group>
                   );
                 }}
@@ -90,13 +109,17 @@ function AggregateEditor({ aggregate }) {
                       className="mr-2"
                       style={{ width: '20%' }}
                     >
-                      <Form.Control type="text" value={value} disabled />
+                      <Form.Control type="text" value={value} readOnly />
                     </Form.Group>
                   );
                 }}
               </ListEditor.ViewItem>
             </ListEditor.View>
-            <ListEditor.Input name="id" className="flex-grow-1 mr-2" />
+            <ListEditor.Input
+              name="id"
+              className="flex-grow-1 mr-2"
+              placeholder="Attribute ID eingeben"
+            />
             <ListEditor.Select
               name="type"
               list={classes}
@@ -108,11 +131,20 @@ function AggregateEditor({ aggregate }) {
           <Button variant="primary" type="submit" disabled={!hasChanges}>
             Submit
           </Button>
+          <Button variant="primary" type="reset" disabled={!hasChanges}>
+            Reset
+          </Button>
         </Form>
       </div>
     );
   }
   return null;
 }
+AggregateEditor.defaultProps = {
+  aggregate: undefined,
+};
+AggregateEditor.propTypes = {
+  aggregate: PropTypes.object,
+};
 
 export default AggregateEditor;

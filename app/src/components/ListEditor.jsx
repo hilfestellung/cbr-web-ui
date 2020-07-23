@@ -1,15 +1,8 @@
-import React, {
-  useState,
-  useCallback,
-  useEffect,
-  useRef,
-  useMemo,
-} from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { PlusSquare, Trash2Fill } from 'react-bootstrap-icons';
-import { useTranslation } from 'react-i18next';
 import { PropTypes, Children, NOP } from '../propTypes';
 
 const ListEditorContext = React.createContext();
@@ -116,7 +109,12 @@ ListEditor.propTypes = {
   onRemove: PropTypes.func,
 };
 
-ListEditor.Input = function ListEditorInput({ name, className, style }) {
+ListEditor.Input = function ListEditorInput({
+  name,
+  className,
+  style,
+  placeholder,
+}) {
   // const { t } = useTranslation();
 
   return (
@@ -133,6 +131,7 @@ ListEditor.Input = function ListEditorInput({ name, className, style }) {
               type="text"
               value={values[name] || ''}
               onChange={({ target }) => onChange(name, target.value)}
+              placeholder={placeholder}
             />
           </Form.Group>
         );
@@ -143,11 +142,13 @@ ListEditor.Input = function ListEditorInput({ name, className, style }) {
 ListEditor.Input.defaultProps = {
   className: null,
   style: null,
+  placeholder: null,
 };
 ListEditor.Input.propTypes = {
   name: PropTypes.string.isRequired,
   className: PropTypes.string,
   style: PropTypes.object,
+  placeholder: PropTypes.string,
 };
 
 ListEditor.Select = function ListEditorSelect({
@@ -191,10 +192,12 @@ ListEditor.Select = function ListEditorSelect({
 ListEditor.Select.defaultProps = {
   className: null,
   style: null,
+  hasEmptyEntry: false,
 };
 ListEditor.Select.propTypes = {
   name: PropTypes.string.isRequired,
   list: PropTypes.array.isRequired,
+  hasEmptyEntry: PropTypes.bool,
   className: PropTypes.string,
   style: PropTypes.object,
 };

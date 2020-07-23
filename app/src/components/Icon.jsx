@@ -1,5 +1,5 @@
 import React from 'react';
-import { PropTypes } from '../propTypes';
+import { PropTypes, Children } from '../propTypes';
 
 function Icon({ size, children, className, style }) {
   return (
@@ -19,9 +19,15 @@ function Icon({ size, children, className, style }) {
 }
 Icon.defaultProps = {
   size: 24,
+  children: null,
+  className: undefined,
+  style: undefined,
 };
 Icon.propTypes = {
   size: PropTypes.number,
+  children: Children,
+  className: PropTypes.string,
+  style: PropTypes.object,
 };
 
 export default Icon;

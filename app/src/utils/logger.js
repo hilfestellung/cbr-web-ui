@@ -36,9 +36,10 @@ function formatMessage(level, name, args) {
 }
 
 export class Logger {
-  constructor(name, config, parent?: Logger) {
+  constructor(name, config, parent) {
     this.nameHolder = name;
     this.configHolder = config;
+    this.parent = parent;
   }
 
   get name() {
