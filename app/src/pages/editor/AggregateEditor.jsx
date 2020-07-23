@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import isEqual from 'lodash/isEqual';
 
@@ -17,6 +17,28 @@ function AggregateEditor({ aggregate }) {
 
   const [editableAggregate, setEditableAggregate] = useState(aggregate);
   const [hasChanges, setHasChanges] = useState(false);
+
+  const addAttribute = useCallback(
+    (attribute) => {
+      setEditableAggregate({
+        ...editableAggregate,
+        attributes: [...editableAggregate.attributes, attribute],
+      });
+    },
+    [editableAggregate, setEditableAggregate]
+  );
+
+  const removeAttribute = useCallback(
+    (index) => {
+      setEditableAggregate({
+        ...editableAggregate,
+        attributes: editableAggregate.attributes.filter(
+          (attribute, i) => index !== i
+        ),
+      });
+    },
+    [editableAggregate, setEditableAggregate]
+  );
 
   useEffect(() => {
     setEditableAggregate(aggregate);
@@ -41,9 +63,47 @@ function AggregateEditor({ aggregate }) {
             <Form.Text className="text-muted">{t('Not editable')}</Form.Text>
           </Form.Group>
 
-          <ListEditor list={aggregate.attributes} classes={classes}>
+          <ListEditor
+            list={editableAggregate.attributes}
+            classes={classes}
+            onAdd={addAttribute}
+            onRemove={removeAttribute}
+          >
+            <ListEditor.View>
+              <ListEditor.ViewItem name="id">
+                {({ value }) => {
+                  return (
+                    <Form.Group
+                      controlId="aggregateId"
+                      className="flex-grow-1 mr-2"
+                    >
+                      <Form.Control type="text" value={value} disabled />
+                    </Form.Group>
+                  );
+                }}
+              </ListEditor.ViewItem>
+              <ListEditor.ViewItem name="type">
+                {({ value }) => {
+                  return (
+                    <Form.Group
+                      controlId="aggregateId"
+                      className="mr-2"
+                      style={{ width: '20%' }}
+                    >
+                      <Form.Control type="text" value={value} disabled />
+                    </Form.Group>
+                  );
+                }}
+              </ListEditor.ViewItem>
+            </ListEditor.View>
             <ListEditor.Input name="id" className="flex-grow-1 mr-2" />
-            <ListEditor.Select name="type" list={classes} className="mr-2" />
+            <ListEditor.Select
+              name="type"
+              list={classes}
+              className="mr-2"
+              style={{ width: '20%' }}
+              hasEmptyEntry
+            />
           </ListEditor>
           <Button variant="primary" type="submit" disabled={!hasChanges}>
             Submit

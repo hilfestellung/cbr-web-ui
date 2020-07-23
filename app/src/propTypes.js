@@ -14,4 +14,6 @@ export const SagaContext = PropTypes.shape({
   authentication: PropTypes.object,
 });
 
+export function NOP() {}
+
 export { default as PropTypes } from 'prop-types';
