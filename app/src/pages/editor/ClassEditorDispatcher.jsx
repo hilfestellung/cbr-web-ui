@@ -29,7 +29,7 @@ function ClassEditorDispatcher() {
       <SimplePage>
         <ClassEditor modelClass={modelClass}>
           <ClassEditorContext.Consumer>
-            {({ editableClass, onClassChange }) => {
+            {({ originClass, editableClass, onClassChange }) => {
               return modelClass.type === 'aggregate' ? (
                 <AggregateEditor
                   modelClass={editableClass}
@@ -44,6 +44,7 @@ function ClassEditorDispatcher() {
                 modelClass.type === 'float' ||
                 modelClass.type === 'date' ? (
                 <RangeEditor
+                  originModelClass={originClass}
                   modelClass={editableClass}
                   onClassChange={onClassChange}
                 />

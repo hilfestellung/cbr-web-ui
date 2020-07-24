@@ -1,23 +1,39 @@
 import React from 'react';
 
-import SimplePage from './layout/SimplePage';
+import { PatchQuestion } from 'react-bootstrap-icons';
 
-function InformationWhatsNext({ icon, children }) {
+import SimplePage from './layout/SimplePage';
+import { PropTypes, Children } from '../propTypes';
+
+function InformationWhatsNext({ icon, title, children }) {
   return (
     <SimplePage>
-      <div className="d-flex">
-        <div
-          className="d-flex align-items-start"
-          style={{ fontSize: '500px', marginTop: '-31px', color: '#bbb' }}
-        >
-          {icon}
+      <div className="full-usable-height">
+        {title && <div>{title}</div>}
+        <div className="d-flex" style={{ height: '66%' }}>
+          <div
+            className="d-flex flex-column justify-content-center align-items-center mr-5"
+            style={{ fontSize: '500px', marginTop: '-31px', color: '#ddd' }}
+          >
+            {icon}
+          </div>
+          <div className="d-flex flex-column justify-content-center align-items-center">
+            {children}
+          </div>
         </div>
-        <div className="d-flex flex-column ml-5 justify-content-center">
-          {children}
-        </div>
+        <div className="d-flex" style={{ height: '34%' }}></div>
       </div>
     </SimplePage>
   );
 }
+InformationWhatsNext.defaultProps = {
+  icon: <PatchQuestion />,
+  title: undefined,
+};
+InformationWhatsNext.propTypes = {
+  icon: PropTypes.element,
+  title: PropTypes.string,
+  children: Children,
+};
 
 export default InformationWhatsNext;

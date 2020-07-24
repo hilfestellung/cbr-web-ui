@@ -20,8 +20,9 @@ function ListEditor({ list, children, onAdd, onRemove }) {
   const add = useCallback(() => {
     if (typeof onAdd === 'function') {
       onAdd(values);
+      setValues({});
     }
-  }, [values, onAdd]);
+  }, [values, onAdd, setValues]);
 
   const remove = useCallback(
     (index) => {

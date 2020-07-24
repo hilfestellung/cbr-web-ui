@@ -3,6 +3,8 @@
 
 @import '~bootstrap/scss/bootstrap';
 
+$full-usable-height: calc(100vh - 74px);
+
 @import './footer/index.scss';
 
 html,
@@ -11,7 +13,17 @@ body,
   height: 100%;
 }
 
+.full-usable-height {
+  height: $full-usable-height;
+}
+
 .full-height {
+  height: 100%;
+}
+
+form-control:focus.default-changes-indicator,
+.default-changes-indicator {
+  background-color: $warning;
 }
 
 .workspace {
@@ -20,17 +32,17 @@ body,
   margin: 0;
   .left {
     overflow-y: auto;
-    height: calc(100vh - 74px);
+    height: $full-usable-height;
     margin: 0;
   }
   .right {
     overflow-y: auto;
-    height: calc(100vh - 74px);
+    height: $full-usable-height;
     margin: 0;
   }
   .content {
     overflow-y: auto;
-    height: calc(100vh - 74px);
+    height: $full-usable-height;
     margin: 0;
   }
 }

@@ -69,6 +69,23 @@ export function* httpGetAuthenticated(
   );
 }
 
+export function* httpPostAuthenticated(
+  url,
+  data,
+  successAction,
+  failedAction,
+  requestConfig = {}
+) {
+  yield httpRequestAuthenticated(
+    'POST',
+    url,
+    data,
+    successAction,
+    failedAction,
+    requestConfig
+  );
+}
+
 export function* httpPutAuthenticated(
   url,
   data,
@@ -80,6 +97,22 @@ export function* httpPutAuthenticated(
     'PUT',
     url,
     data,
+    successAction,
+    failedAction,
+    requestConfig
+  );
+}
+
+export function* httpDeleteAuthenticated(
+  url,
+  successAction,
+  failedAction,
+  requestConfig = {}
+) {
+  yield httpRequestAuthenticated(
+    'DELETE',
+    url,
+    null,
     successAction,
     failedAction,
     requestConfig

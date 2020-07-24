@@ -19,19 +19,24 @@ function Classes() {
             <ClassEditorDispatcher />
           </Route>
           <Route path="/editor">
-            <InformationWhatsNext icon={<Diagram3 />}>
-              <h1>Wissensmodell bearbeiten</h1>
-              <p>Starten Sie hier mit der Bearbeitung Ihres Wissensmodells</p>
-              <ol>
-                <li>
-                  Legen Sie die Struktur Ihrer Fälle mit Hilfe eines Aggregats
-                  fest
-                </li>
-                <li>
-                  Beschreiben Sie die Wertebereiche der Attribute Ihrer Fälle
-                </li>
-                <li>Definieren Sie Ähnlichkeitsmaße für Ihre Wertebereiche</li>
-              </ol>
+            <InformationWhatsNext
+              icon={<Diagram3 />}
+              title={
+                <h1 className="d-flex justify-content-center mt-5">
+                  Wissensmodell bearbeiten
+                </h1>
+              }
+            >
+              <div className="text-info">
+                <h3>
+                  Starten Sie hier mit der Bearbeitung Ihres Wissensmodells
+                </h3>
+                <ol>
+                  <li>Legen Sie die Struktur der Fälle über Aggregate fest</li>
+                  <li>Beschreiben Sie die Wertebereiche für Attribute</li>
+                  <li>Definieren Sie Ähnlichkeitsmaße der Wertebereiche</li>
+                </ol>
+              </div>
             </InformationWhatsNext>
           </Route>
         </Switch>

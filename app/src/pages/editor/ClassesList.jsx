@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback, useState } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
 import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 // import Col from "react-bootstrap/Spinner";
 // import Row from "react-bootstrap/Spinner";
 import ListGroup from 'react-bootstrap/ListGroup';
@@ -14,6 +16,8 @@ import {
   Hash,
   CalendarDate,
   Braces,
+  PlusSquare,
+  Trash,
 } from 'react-bootstrap-icons';
 
 import { ClassesSelector, ClassesAction } from '../../modules/classes';
@@ -28,11 +32,43 @@ function ClassesList() {
   const items = useSelector(ClassesSelector.getItems);
   const error = useSelector(ClassesSelector.getError);
 
+  const [newClassId, setNewClassId] = useState('');
+  const [newClassType, setNewClassType] = useState('aggregate');
+  const [newClassValid, setNewClassValid] = useState(false);
+
+  const addNewClass = useCallback(() => {
+    dispatch(ClassesAction.addClass({ id: newClassId, type: newClassType }));
+    setNewClassId('');
+    setNewClassType('');
+  }, [newClassId, newClassType, setNewClassId, setNewClassType]);
+
+  const removeClass = useCallback((id) => {
+    dispatch(ClassesAction.removeClass(id));
+  }, []);
+
+  const changeNewClassId = useCallback(
+    ({ target }) => {
+      setNewClassId(target.value);
+    },
+    [setNewClassId]
+  );
+
+  const changeNewClassType = useCallback(
+    ({ target }) => {
+      setNewClassType(target.value);
+    },
+    [setNewClassType]
+  );
+
   useEffect(() => {
     if (!items || items.length === 0) {
       dispatch(ClassesAction.fetchClasses());
     }
   }, [items, dispatch]);
+
+  useEffect(() => {
+    setNewClassValid(!!newClassId && !!newClassType);
+  }, [newClassId, newClassType]);
 
   return (
     <SimplePage footer={false}>
@@ -44,49 +80,103 @@ function ClassesList() {
           <pre>{error.stack && error.stack.toString()}</pre>
         </Alert>
       ) : (
-        <ListGroup>
-          {items.map((item, index) => {
-            const isActive = item.id === classid || (!classid && index === 0);
-            return (
-              <ListGroup.Item
-                key={item.id}
-                className={`${
-                  isActive ? 'active ' : ''
-                }list-group-item-action -${classid}- -${item.id}- ${
-                  item.id.toString() === classid
-                }`}
-                as={Link}
-                to={`/editor/class/${item.id}`}
+        <>
+          <Form className="d-flex flex-column">
+            <Form.Group>
+              <Form.Control
+                type="text"
+                value={newClassId}
+                onChange={changeNewClassId}
+              />
+            </Form.Group>
+            <Form.Group>
+              <Form.Control
+                as={'select'}
+                type="text"
+                value={newClassType}
+                onChange={changeNewClassType}
               >
-                <div style={{ display: 'flex', alignItems: 'center' }}>
-                  <div className="pull-left">
-                    <Icon size={32} style={{ marginRight: '8px' }}>
-                      {item.type === 'aggregate' ? (
-                        <Diagram3 />
-                      ) : item.type === 'string' ? (
-                        <Fonts />
-                      ) : item.type === 'integer' || item.type === 'float' ? (
-                        <Hash />
-                      ) : item.type === 'date' ? (
-                        <CalendarDate />
-                      ) : item.type === 'set' ? (
-                        <Braces />
-                      ) : null}
-                    </Icon>
-                  </div>
-                  <div className="pull-left">
-                    <div>{item.id}</div>
-                    <div>
-                      <small>
-                        Type: <strong>{item.type}</strong>
-                      </small>
+                <optgroup label="Composite">
+                  <option value="aggrgate">Aggregate</option>
+                  <option value="set">Set</option>
+                </optgroup>
+                <optgroup label="Atomic">
+                  <option value="date">Date</option>
+                  <option value="integer">Integer</option>
+                  <option value="float">Float</option>
+                  <option value="string">String</option>
+                </optgroup>
+              </Form.Control>
+            </Form.Group>
+            <Button
+              variant="outline-secondary"
+              className="d-flex justify-content-center mb-3"
+              disabled={!newClassValid}
+              onClick={addNewClass}
+            >
+              <Icon>
+                <PlusSquare />
+              </Icon>
+            </Button>
+          </Form>
+          <ListGroup>
+            {items.map((item) => {
+              const isActive = item.id === classid;
+              return (
+                <ListGroup.Item
+                  key={item.id}
+                  className={`${
+                    isActive ? 'active ' : ''
+                  }list-group-item-action -${classid}- -${item.id}- ${
+                    item.id.toString() === classid
+                  }`}
+                  as={Link}
+                  to={`/editor/class/${item.id}`}
+                >
+                  <div className="d-flex align-items-center">
+                    <div className="flex-shrink-1 mr-3">
+                      <Icon size={32}>
+                        {item.type === 'aggregate' ? (
+                          <Diagram3 />
+                        ) : item.type === 'string' ? (
+                          <Fonts />
+                        ) : item.type === 'integer' || item.type === 'float' ? (
+                          <Hash />
+                        ) : item.type === 'date' ? (
+                          <CalendarDate />
+                        ) : item.type === 'set' ? (
+                          <Braces />
+                        ) : null}
+                      </Icon>
+                    </div>
+                    <div className="flex-grow-1">
+                      <div>{item.id}</div>
+                      <div>
+                        <small>
+                          Type: <strong>{item.type}</strong>
+                        </small>
+                      </div>
+                    </div>
+                    <div className="flex-shrink-1">
+                      <Button
+                        variant="link"
+                        className={isActive ? 'text-light' : undefined}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          removeClass(item.id);
+                        }}
+                      >
+                        <Icon>
+                          <Trash />
+                        </Icon>
+                      </Button>
                     </div>
                   </div>
-                </div>
-              </ListGroup.Item>
-            );
-          })}
-        </ListGroup>
+                </ListGroup.Item>
+              );
+            })}
+          </ListGroup>
+        </>
       )}
     </SimplePage>
   );

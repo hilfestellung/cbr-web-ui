@@ -38,6 +38,7 @@ function ClassEditor({ modelClass, children }) {
 
   const onClassChange = useCallback(
     (newModelClass) => {
+      console.log('New model class', newModelClass);
       setEditableModelClass(newModelClass);
     },
     [setEditableModelClass]
@@ -66,6 +67,7 @@ function ClassEditor({ modelClass, children }) {
         </Form.Group>
         <ClassEditorContext.Provider
           value={{
+            originClass: modelClass,
             editableClass: editableModelClass,
             hasChanges,
             onClassChange,

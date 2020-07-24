@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Container from 'react-bootstrap/esm/Container';
+import Container from 'react-bootstrap/Container';
 
 import { getLocalItem } from '../../utils/storage';
 import globals from '../../globals';
