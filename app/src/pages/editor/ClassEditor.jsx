@@ -1,33 +1,99 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { ClassesSelector } from '../../modules/classes';
-import SimplePage from '../../components/layout/SimplePage';
-import AggregateEditor from './AggregateEditor';
+import React, { useState, useEffect, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
-function ClassEditor() {
-  const { id } = useParams();
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
-  const classes = useSelector(ClassesSelector.getItems);
+import isEqual from 'lodash/isEqual';
 
-  const [modelClass, setModelClass] = useState();
+import { ClassesAction } from '../../modules/classes';
+import { PropTypes, Children } from '../../propTypes';
+
+export const ClassEditorContext = React.createContext();
+
+function ClassEditor({ modelClass, children }) {
+  const dispatch = useDispatch();
+  const { t } = useTranslation();
+
+  const [editableModelClass, setEditableModelClass] = useState(modelClass);
+  const [hasChanges, setHasChanges] = useState(false);
+
+  const submit = useCallback(
+    (event) => {
+      if (event && event.preventDefault) {
+        event.preventDefault();
+      }
+      if (event && event.stopPropagation) {
+        event.stopPropagation();
+      }
+      dispatch(ClassesAction.putClass(editableModelClass));
+    },
+    [editableModelClass, setEditableModelClass]
+  );
+
+  const reset = useCallback(() => {
+    setEditableModelClass(modelClass);
+  }, [modelClass, setEditableModelClass]);
+
+  const onClassChange = useCallback(
+    (newModelClass) => {
+      setEditableModelClass(newModelClass);
+    },
+    [setEditableModelClass]
+  );
 
   useEffect(() => {
-    if (classes) {
-      setModelClass(classes.find((entry) => entry.id === id));
-    }
-  }, [id, classes]);
+    setEditableModelClass(modelClass);
+  }, [modelClass]);
 
-  if (modelClass) {
-    return (
-      <SimplePage>
-        {modelClass.type === 'aggregate' ? (
-          <AggregateEditor aggregate={modelClass} />
-        ) : null}
-      </SimplePage>
-    );
-  }
-  return null;
+  useEffect(() => {
+    setHasChanges(!isEqual(modelClass, editableModelClass));
+  }, [modelClass, editableModelClass]);
+
+  return (
+    <div>
+      <Form onReset={reset} onSubmit={submit}>
+        <Form.Group controlId="aggregateId">
+          <Form.Label>Id</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder={t('Enter aggregate ID')}
+            value={editableModelClass.id}
+            disabled
+          />
+          <Form.Text className="text-muted">{t('Not editable')}</Form.Text>
+        </Form.Group>
+        <ClassEditorContext.Provider
+          value={{
+            editableClass: editableModelClass,
+            hasChanges,
+            onClassChange,
+          }}
+        >
+          {children}
+        </ClassEditorContext.Provider>
+        <Button
+          variant="primary"
+          type="submit"
+          disabled={!hasChanges}
+          className="mr-3"
+        >
+          Submit
+        </Button>
+        <Button variant="primary" type="reset" disabled={!hasChanges}>
+          Reset
+        </Button>
+      </Form>
+    </div>
+  );
 }
+ClassEditor.defaultProps = {
+  modelClass: undefined,
+};
+ClassEditor.propTypes = {
+  modelClass: PropTypes.object,
+  children: Children,
+};
 
 export default ClassEditor;

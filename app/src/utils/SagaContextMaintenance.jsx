@@ -27,9 +27,7 @@ function SagaContextMaintenance({ context }) {
     if (history) {
       const router = context.router;
       router.history = history;
-      console.log('History', history, router, context);
     }
-    console.log('Set history', history);
   }, [history, auth, context]);
 
   useEffect(() => {}, [context]);
