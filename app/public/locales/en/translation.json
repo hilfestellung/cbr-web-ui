@@ -2,5 +2,8 @@
   "Login": "Login",
   "Logout": "Logout",
   "Signed in as": "Signed in as",
-  "Search": "Search"
+  "Search": "Search",
+  "Id": "Id",
+  "Type": "Type",
+  "Add": "Add"
 }

@@ -211,7 +211,7 @@ ListEditor.View = function ListEditorView({ children }) {
         React.cloneElement(child, props)
       );
     };
-  }, []);
+  }, [children]);
   return (
     <ListEditorContext.Consumer>
       {({ setView }) => {

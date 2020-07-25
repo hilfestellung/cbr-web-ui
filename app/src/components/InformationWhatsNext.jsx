@@ -32,7 +32,7 @@ InformationWhatsNext.defaultProps = {
 };
 InformationWhatsNext.propTypes = {
   icon: PropTypes.element,
-  title: PropTypes.string,
+  title: PropTypes.element,
   children: Children,
 };
 

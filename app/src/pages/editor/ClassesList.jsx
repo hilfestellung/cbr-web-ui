@@ -1,17 +1,18 @@
 import React, { useEffect, useCallback, useState } from 'react';
 
+import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
 
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-// import Col from "react-bootstrap/Spinner";
-// import Row from "react-bootstrap/Spinner";
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Spinner from 'react-bootstrap/Spinner';
 import {
-  Diagram3,
+  CardList,
   Fonts,
   Hash,
   CalendarDate,
@@ -26,6 +27,7 @@ import Icon from '../../components/Icon';
 
 function ClassesList() {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { id: classid } = useParams();
 
   const isLoading = useSelector(ClassesSelector.isLoading);
@@ -40,11 +42,14 @@ function ClassesList() {
     dispatch(ClassesAction.addClass({ id: newClassId, type: newClassType }));
     setNewClassId('');
     setNewClassType('');
-  }, [newClassId, newClassType, setNewClassId, setNewClassType]);
+  }, [newClassId, newClassType, setNewClassId, setNewClassType, dispatch]);
 
-  const removeClass = useCallback((id) => {
-    dispatch(ClassesAction.removeClass(id));
-  }, []);
+  const removeClass = useCallback(
+    (id) => {
+      dispatch(ClassesAction.removeClass(id));
+    },
+    [dispatch]
+  );
 
   const changeNewClassId = useCallback(
     ({ target }) => {
@@ -82,41 +87,50 @@ function ClassesList() {
       ) : (
         <>
           <Form className="d-flex flex-column">
-            <Form.Group>
-              <Form.Control
-                type="text"
-                value={newClassId}
-                onChange={changeNewClassId}
-              />
+            <Form.Group as={Row} controlId="newClassId">
+              <Form.Label column xs={2}>
+                {t('Id')}
+              </Form.Label>
+              <Col xs={10}>
+                <Form.Control
+                  type="text"
+                  value={newClassId}
+                  onChange={changeNewClassId}
+                />
+              </Col>
             </Form.Group>
-            <Form.Group>
-              <Form.Control
-                as={'select'}
-                type="text"
-                value={newClassType}
-                onChange={changeNewClassType}
-              >
-                <optgroup label="Composite">
-                  <option value="aggrgate">Aggregate</option>
-                  <option value="set">Set</option>
-                </optgroup>
-                <optgroup label="Atomic">
-                  <option value="date">Date</option>
-                  <option value="integer">Integer</option>
-                  <option value="float">Float</option>
-                  <option value="string">String</option>
-                </optgroup>
-              </Form.Control>
+            <Form.Group as={Row} controlId="newClassType">
+              <Form.Label column xs={2}>
+                {t('Type')}
+              </Form.Label>
+              <Col xs={10}>
+                <Form.Control
+                  as={'select'}
+                  type="text"
+                  value={newClassType}
+                  onChange={changeNewClassType}
+                >
+                  <optgroup label={t('Composite')}>
+                    <option value="aggrgate">{t('Aggregate')}</option>
+                    <option value="set">{t('Set')}</option>
+                  </optgroup>
+                  <optgroup label={t('Atomic')}>
+                    <option value="date">{t('Date')}</option>
+                    <option value="integer">{t('Integer')}</option>
+                    <option value="float">{t('Float')}</option>
+                    <option value="string">{t('String')}</option>
+                  </optgroup>
+                </Form.Control>
+              </Col>
             </Form.Group>
             <Button
               variant="outline-secondary"
-              className="d-flex justify-content-center mb-3"
+              className="d-flex align-items-center justify-content-center mb-3"
               disabled={!newClassValid}
               onClick={addNewClass}
             >
-              <Icon>
-                <PlusSquare />
-              </Icon>
+              <PlusSquare />
+              &nbsp;{t('Add')}
             </Button>
           </Form>
           <ListGroup>
@@ -137,7 +151,7 @@ function ClassesList() {
                     <div className="flex-shrink-1 mr-3">
                       <Icon size={32}>
                         {item.type === 'aggregate' ? (
-                          <Diagram3 />
+                          <CardList />
                         ) : item.type === 'string' ? (
                           <Fonts />
                         ) : item.type === 'integer' || item.type === 'float' ? (
@@ -153,14 +167,14 @@ function ClassesList() {
                       <div>{item.id}</div>
                       <div>
                         <small>
-                          Type: <strong>{item.type}</strong>
+                          {t('Type')} <strong>{item.type}</strong>
                         </small>
                       </div>
                     </div>
                     <div className="flex-shrink-1">
                       <Button
                         variant="link"
-                        className={isActive ? 'text-light' : undefined}
+                        className={isActive ? 'text-light' : 'text-secondary'}
                         onClick={(e) => {
                           e.preventDefault();
                           removeClass(item.id);

@@ -29,7 +29,7 @@ function ClassEditor({ modelClass, children }) {
       }
       dispatch(ClassesAction.putClass(editableModelClass));
     },
-    [editableModelClass, setEditableModelClass]
+    [editableModelClass, dispatch]
   );
 
   const reset = useCallback(() => {

@@ -2,5 +2,16 @@
   "Login": "Anmelden",
   "Logout": "Abmelden",
   "Signed in as": "Angemeldet als",
-  "Search": "Suchen"
+  "Search": "Suchen",
+  "Id": "Id",
+  "Type": "Typ",
+  "Add": "Hinzufügen",
+  "Composite": "Kombination",
+  "Atomic": "Atomar",
+  "Aggregate": "Aggregat",
+  "Set": "Menge",
+  "Integer": "Ganzzahl",
+  "Float": "Fließkomma",
+  "String": "Symbol",
+  "Date": "Datum"
 }
