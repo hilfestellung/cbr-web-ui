@@ -7,6 +7,7 @@
 $full-usable-height: calc(100vh - 74px);
 
 @import './footer/index.scss';
+//@import './slider/index.scss';
 
 :export {
   primary: $primary;
