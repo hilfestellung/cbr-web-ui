@@ -3,8 +3,10 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import { Diagram3 } from 'react-bootstrap-icons';
 
-import Workspace from '../../components/layout/Workspace';
-import InformationWhatsNext from '../../components/InformationWhatsNext';
+import Button from 'react-bootstrap/Button';
+
+import Workspace from '../../../components/layout/Workspace';
+import InformationWhatsNext from '../../../components/InformationWhatsNext';
 import ClassesList from './ClassesList';
 import ClassEditorDispatcher from './ClassEditorDispatcher';
 
@@ -12,7 +14,6 @@ function Classes() {
   return (
     <Workspace
       left={<ClassesList />}
-      right={<div>Content Hallo</div>}
       content={
         <Switch>
           <Route path="/editor/class/:id">
@@ -36,6 +37,15 @@ function Classes() {
                   <li>Beschreiben Sie die Wertebereiche für Attribute</li>
                   <li>Definieren Sie Ähnlichkeitsmaße der Wertebereiche</li>
                 </ol>
+                <Button variant="primary">Submit</Button>
+                <Button variant="secondary">Submit</Button>
+                <Button variant="success">Submit</Button>
+                <Button variant="warning">Submit</Button>
+                <Button variant="danger">Submit</Button>
+                <Button variant="info">Submit</Button>
+                <Button variant="light">Submit</Button>
+                <Button variant="dark">Submit</Button>
+                <Button variant="link">Submit</Button>
               </div>
             </InformationWhatsNext>
           </Route>

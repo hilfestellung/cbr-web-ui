@@ -3,9 +3,9 @@ import React, { useCallback } from 'react';
 import Form from 'react-bootstrap/Form';
 import { useSelector } from 'react-redux';
 
-import { ClassesSelector } from '../../modules/classes';
-import ListEditor from '../../components/ListEditor';
-import { PropTypes, NOP } from '../../propTypes';
+import { ClassesSelector } from '../../../modules/classes';
+import ListEditor from '../../../components/ListEditor';
+import { PropTypes, NOP } from '../../../propTypes';
 
 function AggregateEditor({ modelClass, onClassChange }) {
   const classes = useSelector(ClassesSelector.getItems);

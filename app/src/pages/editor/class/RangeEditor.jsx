@@ -1,10 +1,11 @@
 import React, { useCallback, useState, useEffect } from 'react';
 
-import Form from 'react-bootstrap/Form';
-import { PropTypes, NOP } from '../../propTypes';
-import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import SubmittableControl from '../../components/SubmittableControl';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+
+import { PropTypes, NOP } from '../../../propTypes';
+import SubmittableControl from '../../../components/SubmittableControl';
 
 const parsers = {
   integer: (input) => parseInt(input, 10),

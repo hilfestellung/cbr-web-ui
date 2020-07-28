@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import Form from 'react-bootstrap/Form';
 
-import ListEditor from '../../components/ListEditor';
-import { NOP } from '../../propTypes';
+import ListEditor from '../../../components/ListEditor';
+import { NOP } from '../../../propTypes';
 
 EnumerationEditor.propTypes = {};
 
@@ -53,7 +53,7 @@ function EnumerationEditor({ modelClass, onClassChange }) {
         <ListEditor.Input
           name="id"
           className="flex-grow-1 mr-2"
-          placeholder="Attribute ID eingeben"
+          placeholder="Symbol ID eingeben"
         />
       </ListEditor>
     </>

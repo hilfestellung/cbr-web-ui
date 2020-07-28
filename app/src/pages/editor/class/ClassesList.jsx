@@ -21,9 +21,14 @@ import {
   Trash,
 } from 'react-bootstrap-icons';
 
-import { ClassesSelector, ClassesAction } from '../../modules/classes';
-import SimplePage from '../../components/layout/SimplePage';
-import Icon from '../../components/Icon';
+import { ClassesSelector, ClassesAction } from '../../../modules/classes';
+import {
+  EvaluatorsSelector,
+  EvaluatorAction,
+} from '../../../modules/evaluators';
+import SimplePage from '../../../components/layout/SimplePage';
+import Icon from '../../../components/Icon';
+import { classFactory } from '@hilfestellung/cbr-kernel';
 
 function ClassesList() {
   const dispatch = useDispatch();
@@ -32,14 +37,21 @@ function ClassesList() {
 
   const isLoading = useSelector(ClassesSelector.isLoading);
   const items = useSelector(ClassesSelector.getItems);
+  // eslint-disable-next-line no-unused-vars
+  const evaluatorItems = useSelector(EvaluatorsSelector.getItems);
   const error = useSelector(ClassesSelector.getError);
 
+  const [loaded, setLoaded] = useState(false);
   const [newClassId, setNewClassId] = useState('');
   const [newClassType, setNewClassType] = useState('aggregate');
   const [newClassValid, setNewClassValid] = useState(false);
 
   const addNewClass = useCallback(() => {
-    dispatch(ClassesAction.addClass({ id: newClassId, type: newClassType }));
+    dispatch(
+      ClassesAction.addClass(
+        classFactory({ id: newClassId, type: newClassType }).toJSON()
+      )
+    );
     setNewClassId('');
     setNewClassType('');
   }, [newClassId, newClassType, setNewClassId, setNewClassType, dispatch]);
@@ -66,10 +78,12 @@ function ClassesList() {
   );
 
   useEffect(() => {
-    if (!items || items.length === 0) {
+    if (!loaded) {
       dispatch(ClassesAction.fetchClasses());
+      dispatch(EvaluatorAction.fetchEvaluators());
+      setLoaded(true);
     }
-  }, [items, dispatch]);
+  }, [loaded, setLoaded, dispatch]);
 
   useEffect(() => {
     setNewClassValid(!!newClassId && !!newClassType);

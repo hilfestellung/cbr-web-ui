@@ -13,7 +13,7 @@ function InformationWhatsNext({ icon, title, children }) {
         <div className="d-flex" style={{ height: '66%' }}>
           <div
             className="d-flex flex-column justify-content-center align-items-center mr-5"
-            style={{ fontSize: '500px', marginTop: '-31px', color: '#ddd' }}
+            style={{ fontSize: '500px', marginTop: '-31px', color: '#e0e0e0' }}
           >
             {icon}
           </div>

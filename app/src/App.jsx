@@ -4,16 +4,18 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
 
 import PrivateRoute from './utils/PrivateRoute';
+import SagaContextMaintenance from './utils/SagaContextMaintenance';
 
 // Public Routes
 import Home from './pages/home/Home';
-import Privacy from './pages/privacy/Privacy';
 import Impressum from './pages/privacy/Impressum';
+import Privacy from './pages/privacy/Privacy';
 
 // Private Routes
+import Classes from './pages/editor/class/Classes';
+import Evaluators from './pages/editor/evaluator/NumberEvaluatorEditor';
 import Search from './pages/search/Search';
-import Classes from './pages/editor/Classes';
-import SagaContextMaintenance from './utils/SagaContextMaintenance';
+import { SagaContext } from './propTypes';
 
 function App({ sagaContext }) {
   return (
@@ -28,6 +30,9 @@ function App({ sagaContext }) {
         </PrivateRoute>
         <PrivateRoute path="/editor/class/:id">
           <Classes />
+        </PrivateRoute>
+        <PrivateRoute path="/editor/evaluator/:id">
+          <Evaluators />
         </PrivateRoute>
         <PrivateRoute path="/editor">
           <Classes />
@@ -47,5 +52,8 @@ function App({ sagaContext }) {
     </Router>
   );
 }
+App.propTypes = {
+  sagaContext: SagaContext,
+};
 
 export default App;

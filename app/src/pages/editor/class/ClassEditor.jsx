@@ -7,8 +7,8 @@ import Button from 'react-bootstrap/Button';
 
 import isEqual from 'lodash/isEqual';
 
-import { ClassesAction } from '../../modules/classes';
-import { PropTypes, Children } from '../../propTypes';
+import { ClassesAction } from '../../../modules/classes';
+import { PropTypes, Children } from '../../../propTypes';
 
 export const ClassEditorContext = React.createContext();
 

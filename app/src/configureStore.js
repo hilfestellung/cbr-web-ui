@@ -11,6 +11,7 @@ import { watchLocation, locationReducer } from './modules/location';
 import { watchSearchActions, searchReducer } from './modules/search';
 import { watchUserActions, userReducer } from './modules/user';
 import { classesReducer, watchClassesActions } from './modules/classes';
+import { evaluatorsReducer, watchEvaluatorActions } from './modules/evaluators';
 
 const { isProduction } = globals;
 
@@ -30,6 +31,7 @@ export default function (context) {
     app: (state = {}) => state,
     basic: basicReducer,
     classes: classesReducer,
+    evaluators: evaluatorsReducer,
     user: userReducer,
     search: searchReducer,
     location: locationReducer,
@@ -38,9 +40,10 @@ export default function (context) {
   // Saga definition
   const sagas = [
     watchBasicActions,
+    watchLocation,
     watchUserActions,
     watchClassesActions,
-    watchLocation,
+    watchEvaluatorActions,
     watchSearchActions,
   ];
 
