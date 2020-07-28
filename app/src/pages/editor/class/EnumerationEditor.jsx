@@ -13,7 +13,7 @@ function EnumerationEditor({ modelClass, onClassChange }) {
     (symbol) => {
       onClassChange({
         ...modelClass,
-        enumeration: [...modelClass.enumeration, symbol],
+        enumeration: [...(modelClass.enumeration || []), symbol],
       });
     },
     [modelClass, onClassChange]
@@ -23,7 +23,9 @@ function EnumerationEditor({ modelClass, onClassChange }) {
     (index) => {
       onClassChange({
         ...modelClass,
-        enumeration: modelClass.enumeration.filter((_, i) => index !== i),
+        enumeration: (modelClass.enumeration || []).filter(
+          (_, i) => index !== i
+        ),
       });
     },
     [modelClass, onClassChange]
