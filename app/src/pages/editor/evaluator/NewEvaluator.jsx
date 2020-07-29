@@ -5,7 +5,15 @@ import { PropTypes } from '../../../propTypes';
 import Button from 'react-bootstrap/esm/Button';
 import { useDispatch } from 'react-redux';
 import { EvaluatorAction } from '../../../modules/evaluators';
-import { NumberEvaluator } from '@hilfestellung/cbr-kernel';
+import {
+  NumberEvaluator,
+  AggregateEvaluator,
+  AggregateSimilarityMode,
+  SetEvaluator,
+  SetComparisonType,
+  LookupEvaluator,
+  LookupMode,
+} from '@hilfestellung/cbr-kernel';
 
 function NewEvaluator({ modelClass }) {
   const dispatch = useDispatch();
@@ -20,11 +28,33 @@ function NewEvaluator({ modelClass }) {
       if (event.stopPropagation) {
         event.stopPropagation();
       }
-      dispatch(
-        EvaluatorAction.addEvaluator(
-          new NumberEvaluator(id, modelClass.id).toJSON()
-        )
-      );
+      let evaluator;
+      if (pattern === 'number') {
+        evaluator = new NumberEvaluator(id, modelClass.id);
+      } else if (pattern === 'aggregate') {
+        evaluator = new AggregateEvaluator(
+          id,
+          modelClass.id,
+          AggregateSimilarityMode.average
+        );
+        evaluator.attributes = modelClass.attributes.map((attribute) => ({
+          id: attribute.id,
+          weight: 1,
+        }));
+      } else if (pattern === 'set') {
+        evaluator = new SetEvaluator(
+          id,
+          modelClass.id,
+          SetComparisonType.Intermediate
+        );
+      } else if (pattern === 'lookup') {
+        evaluator = new LookupEvaluator(
+          id,
+          modelClass.id,
+          LookupMode.Symmetric
+        );
+      }
+      dispatch(EvaluatorAction.addEvaluator(evaluator.toJSON()));
     },
     [id, pattern, modelClass]
   );

@@ -20,6 +20,7 @@ import EvaluatorEditor, {
   EvaluatorEditorContext,
 } from '../evaluator/EvaluatorEditor';
 import NewEvaluator from '../evaluator/NewEvaluator';
+import AggregateEvaluatorEditor from '../evaluator/AggregateEvaluatorEditor';
 
 function ClassEditorDispatcher() {
   const { id } = useParams();
@@ -53,7 +54,7 @@ function ClassEditorDispatcher() {
 
   if (modelClass) {
     return (
-      <SimplePage>
+      <SimplePage fluid>
         <Tabs
           className="mb-4"
           activeKey={activeKey}
@@ -100,7 +101,14 @@ function ClassEditorDispatcher() {
                       editableEvaluator,
                       onEvaluatorChange,
                     }) => {
-                      return evaluator.pattern === 'number' ? (
+                      return evaluator.pattern === 'aggregate' ? (
+                        <AggregateEvaluatorEditor
+                          modelClass={modelClass}
+                          evaluator={editableEvaluator}
+                          originEvaluator={originEvaluator}
+                          onEvaluatorChange={onEvaluatorChange}
+                        />
+                      ) : evaluator.pattern === 'number' ? (
                         <NumberEvaluatorEditor
                           modelClass={modelClass}
                           evaluator={editableEvaluator}

@@ -159,8 +159,6 @@ ListEditor.Select = function ListEditorSelect({
   hasEmptyEntry,
   style,
 }) {
-  // const { t } = useTranslation();
-
   return (
     <ListEditorContext.Consumer>
       {({ values, onChange, addName }) => {

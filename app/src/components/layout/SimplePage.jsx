@@ -4,10 +4,12 @@ import Container from 'react-bootstrap/Container';
 import Footer from './Footer';
 import { PropTypes, Children } from '../../propTypes';
 
-function SimplePage({ children, footer }) {
+function SimplePage({ children, footer, ...props }) {
   return (
     <>
-      <Container className="mt-4 mb-4">{children}</Container>
+      <Container {...props} className="mt-4 mb-4">
+        {children}
+      </Container>
       {footer && <Footer />}
     </>
   );

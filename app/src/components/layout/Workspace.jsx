@@ -5,6 +5,13 @@ import Row from 'react-bootstrap/Row';
 import { Children } from '../../propTypes';
 
 function Workspace({ left, right, content, toolbar }) {
+  let contentWidth = 7;
+  if (!left) {
+    contentWidth += 3;
+  }
+  if (!right) {
+    contentWidth += 2;
+  }
   return (
     <Row className="workspace">
       {left && (
@@ -13,7 +20,7 @@ function Workspace({ left, right, content, toolbar }) {
         </Col>
       )}
       {content && (
-        <Col xs={7} className="content">
+        <Col xs={contentWidth} className="content">
           {content}
         </Col>
       )}
