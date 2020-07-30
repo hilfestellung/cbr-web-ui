@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import Tab from 'react-bootstrap/Tab';
@@ -24,42 +24,31 @@ import AggregateEvaluatorEditor from '../evaluator/AggregateEvaluatorEditor';
 import LookupTableEditor from '../evaluator/LookupTableEditor';
 
 function ClassEditorDispatcher() {
-  const { id } = useParams();
+  const { id, evaluatorId = 'ClassDefinition' } = useParams();
+  const history = useHistory();
 
   const classes = useSelector(ClassesSelector.getItems);
   const evaluators = useSelector(EvaluatorsSelector.getItems);
 
-  const [activeKey, setActiveKey] = useState();
   const [modelClass, setModelClass] = useState();
   const [classEvaluators, setClassEvaluators] = useState([]);
 
   useEffect(() => {
-    if (modelClass != null && modelClass.id !== id) {
-      setActiveKey('ClassDefinition');
-    }
     if (classes) {
       setModelClass(classes.find((entry) => entry.id === id));
     }
     if (evaluators) {
       setClassEvaluators(evaluators.filter((entry) => entry.type === id));
     }
-  }, [
-    id,
-    classes,
-    evaluators,
-    modelClass,
-    setActiveKey,
-    setModelClass,
-    setClassEvaluators,
-  ]);
-
+  }, [id, classes, evaluators, modelClass, setModelClass, setClassEvaluators]);
+  console.log('Evaluator ID', evaluatorId);
   if (modelClass) {
     return (
       <SimplePage fluid>
         <Tabs
           className="mb-4"
-          activeKey={activeKey}
-          onSelect={(key) => setActiveKey(key)}
+          activeKey={evaluatorId}
+          onSelect={(key) => history.push(`/editor/class/${id}/${key}`)}
         >
           <Tab eventKey="ClassDefinition" title="Class definition">
             <ClassEditor modelClass={modelClass}>
@@ -91,10 +80,10 @@ function ClassEditorDispatcher() {
           {classEvaluators.map((evaluator) => (
             <Tab
               key={evaluator.id}
-              eventKey={`SimilarityMeasure_${evaluator.id}`}
+              eventKey={evaluator.id}
               title={`Measure ${evaluator.id}`}
             >
-              {activeKey === `SimilarityMeasure_${evaluator.id}` ? (
+              {evaluatorId === evaluator.id ? (
                 <EvaluatorEditor evaluator={evaluator}>
                   <EvaluatorEditorContext.Consumer>
                     {({

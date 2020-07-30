@@ -14,7 +14,7 @@ function Classes() {
       left={<ClassesList />}
       content={
         <Switch>
-          <Route path="/editor/class/:id">
+          <Route path={['/editor/class/:id/:evaluatorId', '/editor/class/:id']}>
             <ClassEditorDispatcher />
           </Route>
           <Route path="/editor">
