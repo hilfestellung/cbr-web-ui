@@ -39,19 +39,16 @@ function EvaluatorEditor({ evaluator, children }) {
 
   const onEvaluatorChange = useCallback(
     (newEvaluator) => {
-      console.log(newEvaluator);
       setEditableEvaluator(newEvaluator);
     },
     [setEditableEvaluator]
   );
 
   useEffect(() => {
-    console.log('Origin', evaluator);
     setEditableEvaluator({ ...evaluator });
   }, [evaluator, setEditableEvaluator]);
 
   useEffect(() => {
-    console.log('Equals', evaluator, editableEvaluator);
     setHasChanges(!isEqual(evaluator, editableEvaluator));
   }, [evaluator, editableEvaluator]);
 

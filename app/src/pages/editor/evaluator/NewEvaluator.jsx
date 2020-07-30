@@ -55,8 +55,10 @@ function NewEvaluator({ modelClass }) {
         );
       }
       dispatch(EvaluatorAction.addEvaluator(evaluator.toJSON()));
+      setId('');
+      setPattern('');
     },
-    [id, pattern, modelClass]
+    [id, pattern, modelClass, setId, setPattern]
   );
   return (
     <Form onSubmit={submit}>

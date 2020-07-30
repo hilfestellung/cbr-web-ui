@@ -5,15 +5,26 @@ import Form from 'react-bootstrap/Form';
 
 import { PropTypes, NOP } from '../../../propTypes';
 import { EvaluatorsSelector } from '../../../modules/evaluators';
+import { evaluatorFactory } from '@hilfestellung/cbr-kernel';
 
 function AggregateEvaluatorEditor({
   modelClass,
   evaluator,
-  originEvaluator,
   onEvaluatorChange,
 }) {
   const evaluators = useSelector(EvaluatorsSelector.getItems);
   const [evaluatorMap, setEvaluatorMap] = useState({});
+
+  const changeMode = useCallback(
+    ({ target }) => {
+      onEvaluatorChange({ ...evaluator, mode: target.value });
+      console.log(
+        'Evaluator',
+        evaluatorFactory({ ...evaluator, mode: target.value }).toJSON()
+      );
+    },
+    [evaluator, onEvaluatorChange]
+  );
 
   const changeEvaluator = useCallback(
     (id) => {
@@ -24,9 +35,7 @@ function AggregateEvaluatorEditor({
             attribute.id === id
               ? {
                   ...attribute,
-                  evaluator: evaluators.find(
-                    (evaluator) => evaluator.id === target.value
-                  ),
+                  evaluator: target.value,
                 }
               : attribute
           ),
@@ -43,7 +52,7 @@ function AggregateEvaluatorEditor({
           ...evaluator,
           attributes: evaluator.attributes.map((attribute) =>
             attribute.id === id
-              ? { ...attribute, weight: parseFloat(target.value).toFixed(3) }
+              ? { ...attribute, weight: target.value }
               : attribute
           ),
         });
@@ -78,6 +87,23 @@ function AggregateEvaluatorEditor({
 
   return (
     <>
+      <div className="d-flex flex-row">
+        <div className="flex-grow-1 mr-2"></div>
+        <Form.Group className="mr-2" style={{ width: '20%' }}>
+          <Form.Label>Similarity mode</Form.Label>
+          <Form.Control
+            as="select"
+            value={evaluator.mode}
+            onChange={changeMode}
+          >
+            <option value="Average">Average</option>
+            <option value="Min">Minimum</option>
+            <option value="Max">Maximum</option>
+            <option value="Euclidean">Euclidean</option>
+          </Form.Control>
+        </Form.Group>
+        <div className="mr-2" style={{ width: '10%' }}></div>
+      </div>
       {evaluator &&
         Array.isArray(evaluator.attributes) &&
         evaluator.attributes.map((attribute, index) => {
@@ -87,7 +113,7 @@ function AggregateEvaluatorEditor({
                 controlId={attribute.id + 'Id'}
                 className="flex-grow-1 mr-2"
               >
-                {index === 0 && <Form.Label>Id</Form.Label>}
+                {index === 0 && <Form.Label>Attribute</Form.Label>}
                 <Form.Control name="id" value={attribute.id} readOnly />
               </Form.Group>
               <Form.Group
@@ -114,7 +140,7 @@ function AggregateEvaluatorEditor({
               <Form.Group
                 controlId={attribute.id + 'WeightId'}
                 className="mr-2"
-                style={{ width: '20%' }}
+                style={{ width: '10%' }}
               >
                 {index === 0 && <Form.Label>Weight</Form.Label>}
                 <Form.Control
@@ -122,6 +148,7 @@ function AggregateEvaluatorEditor({
                   name="weight"
                   value={attribute.weight != null ? attribute.weight : 0}
                   onChange={changeWeight(attribute.id)}
+                  disabled={evaluator.mode !== 'Average'}
                 />
               </Form.Group>
             </div>
@@ -130,7 +157,6 @@ function AggregateEvaluatorEditor({
     </>
   );
 }
-
 AggregateEvaluatorEditor.defaultProps = {
   modelClass: undefined,
   evaluator: undefined,

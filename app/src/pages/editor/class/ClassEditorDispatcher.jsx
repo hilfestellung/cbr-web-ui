@@ -21,6 +21,7 @@ import EvaluatorEditor, {
 } from '../evaluator/EvaluatorEditor';
 import NewEvaluator from '../evaluator/NewEvaluator';
 import AggregateEvaluatorEditor from '../evaluator/AggregateEvaluatorEditor';
+import LookupTableEditor from '../evaluator/LookupTableEditor';
 
 function ClassEditorDispatcher() {
   const { id } = useParams();
@@ -110,6 +111,13 @@ function ClassEditorDispatcher() {
                         />
                       ) : evaluator.pattern === 'number' ? (
                         <NumberEvaluatorEditor
+                          modelClass={modelClass}
+                          evaluator={editableEvaluator}
+                          originEvaluator={originEvaluator}
+                          onEvaluatorChange={onEvaluatorChange}
+                        />
+                      ) : evaluator.pattern === 'lookup' ? (
+                        <LookupTableEditor
                           modelClass={modelClass}
                           evaluator={editableEvaluator}
                           originEvaluator={originEvaluator}

@@ -27,7 +27,6 @@ function SubmittableControl({
 
   const changeValue = useCallback(
     ({ target }) => {
-      console.log('Change', target.value);
       setEditableValue(target.value);
       controlRef.current.checkValidity();
     },
@@ -54,7 +53,6 @@ function SubmittableControl({
 
   useEffect(() => {
     const newHasChanges = !isEqual(origin, value);
-    console.log('Has Changes', origin, value, newHasChanges);
     setHasChanges(newHasChanges);
   }, [origin, value, setHasChanges]);
 

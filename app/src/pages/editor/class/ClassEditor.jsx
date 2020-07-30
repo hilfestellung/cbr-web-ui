@@ -38,7 +38,6 @@ function ClassEditor({ modelClass, children }) {
 
   const onClassChange = useCallback(
     (newModelClass) => {
-      console.log('New model class', newModelClass);
       setEditableModelClass(newModelClass);
     },
     [setEditableModelClass]

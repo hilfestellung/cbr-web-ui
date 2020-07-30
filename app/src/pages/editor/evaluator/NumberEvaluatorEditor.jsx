@@ -165,7 +165,6 @@ function NumberEvaluatorEditor({
 
   useEffect(() => {
     const newInstance = evaluatorFactory(evaluator);
-    console.log('New instance', newInstance, modelClass);
     newInstance.setRange(modelClass.range.min.id, modelClass.range.max.id);
     setEvaluatorInstance(newInstance);
     if (query == null && evaluatorInstance) {
@@ -352,8 +351,7 @@ function NumberEvaluatorEditor({
                   type="switch"
                   label="Cyclic"
                   checked={cyclic}
-                  onChange={({ target }) => {
-                    console.log(target.value);
+                  onChange={() => {
                     setCyclic(!cyclic);
                   }}
                 />

@@ -83,7 +83,6 @@ function RangeEditor({ originModelClass, modelClass, onClassChange }) {
     } else {
       setMax('');
     }
-    console.log('Class is new set', modelClass);
   }, [modelClass, setMin, setMax]);
 
   return (
