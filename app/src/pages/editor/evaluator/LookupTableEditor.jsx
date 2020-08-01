@@ -3,17 +3,10 @@ import React, { useState, useEffect } from 'react';
 import Form from 'react-bootstrap/Form';
 
 import { PropTypes, NOP } from '../../../propTypes';
+import SymmetricTable from './SymmetricTable';
 
-function LookupTableEditor({
-  modelClass,
-  evaluator,
-  originEvaluator,
-  onEvaluatorChange,
-}) {
+function LookupTableEditor({ modelClass, evaluator, onEvaluatorChange }) {
   const [mode, setMode] = useState();
-  const [source, setSource] = useState();
-  const [destination, setDestination] = useState();
-  const [similarity, setSimilarity] = useState();
 
   useEffect(() => {
     if (evaluator) {
@@ -28,44 +21,20 @@ function LookupTableEditor({
         <Form.Control
           as="select"
           value={mode}
-          onChange={({ target }) => setMode(target.value)}
+          onChange={({ target }) =>
+            onEvaluatorChange({ ...evaluator, mode: target.value })
+          }
         >
-          <option value="symmetric">Symmetric</option>
-          <option value="asymmetric">Asymmetric</option>
+          <option value="Symmetric">Symmetric</option>
+          <option value="Asymmetric">Asymmetric</option>
         </Form.Control>
       </Form.Group>
-      <div className="d-flex">
-        <Form.Group controlId="sourceId" className="flex-grow-1 mr-2">
-          <Form.Label>Source</Form.Label>
-          <Form.Control as="select">
-            {modelClass &&
-              Array.isArray(modelClass.enumeration) &&
-              modelClass.enumeration.map((symbol) => {
-                return <option key={symbol.id}>{symbol.id}</option>;
-              })}
-          </Form.Control>
-        </Form.Group>
-        <Form.Group controlId="destinationId" className="flex-grow-1 mr-2">
-          <Form.Label>Source</Form.Label>
-          <Form.Control as="select">
-            {modelClass &&
-              Array.isArray(modelClass.enumeration) &&
-              modelClass.enumeration.map((symbol) => {
-                return <option key={symbol.id}>{symbol.id}</option>;
-              })}
-          </Form.Control>
-        </Form.Group>
-        <Form.Group controlId="similarity" className="flex-shrink-1">
-          <Form.Label>Similarity</Form.Label>
-          <Form.Control
-            type="number"
-            min={0}
-            max={1}
-            value={similarity}
-            onChnage={({ target }) => setSimilarity(target.value)}
-          />
-        </Form.Group>
-      </div>
+      <SymmetricTable
+        data={modelClass.enumeration}
+        symmetric={mode === 'Symmetric'}
+        evaluator={evaluator}
+        onChange={onEvaluatorChange}
+      />
     </div>
   );
 }

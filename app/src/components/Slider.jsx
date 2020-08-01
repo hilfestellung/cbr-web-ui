@@ -49,7 +49,7 @@ function Slider({
         setLower(lower);
       }
     },
-    [throttledOnChange]
+    [split, throttledOnChange]
   );
 
   const changeValueHigher = useCallback(
@@ -70,7 +70,7 @@ function Slider({
         setLower(higher);
       }
     },
-    [throttledOnChange]
+    [split, throttledOnChange]
   );
 
   useEffect(() => {
@@ -86,6 +86,7 @@ function Slider({
   }, [
     min,
     max,
+    resolution,
     split,
     setScaleFactorLower,
     setScaleFactorHigher,

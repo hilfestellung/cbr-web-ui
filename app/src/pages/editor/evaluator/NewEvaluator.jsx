@@ -58,7 +58,7 @@ function NewEvaluator({ modelClass }) {
       setId('');
       setPattern('');
     },
-    [id, pattern, modelClass, setId, setPattern]
+    [id, pattern, modelClass, dispatch, setId, setPattern]
   );
   return (
     <Form onSubmit={submit}>

@@ -41,7 +41,7 @@ function ClassEditorDispatcher() {
       setClassEvaluators(evaluators.filter((entry) => entry.type === id));
     }
   }, [id, classes, evaluators, modelClass, setModelClass, setClassEvaluators]);
-  console.log('Evaluator ID', evaluatorId);
+
   if (modelClass) {
     return (
       <SimplePage fluid>

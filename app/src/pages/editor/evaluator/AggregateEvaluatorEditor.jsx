@@ -5,7 +5,6 @@ import Form from 'react-bootstrap/Form';
 
 import { PropTypes, NOP } from '../../../propTypes';
 import { EvaluatorsSelector } from '../../../modules/evaluators';
-import { evaluatorFactory } from '@hilfestellung/cbr-kernel';
 
 function AggregateEvaluatorEditor({
   modelClass,
@@ -18,10 +17,6 @@ function AggregateEvaluatorEditor({
   const changeMode = useCallback(
     ({ target }) => {
       onEvaluatorChange({ ...evaluator, mode: target.value });
-      console.log(
-        'Evaluator',
-        evaluatorFactory({ ...evaluator, mode: target.value }).toJSON()
-      );
     },
     [evaluator, onEvaluatorChange]
   );
@@ -56,6 +51,7 @@ function AggregateEvaluatorEditor({
               : attribute
           ),
         });
+        return true;
       };
     },
     [evaluator, onEvaluatorChange]
@@ -64,7 +60,7 @@ function AggregateEvaluatorEditor({
   useEffect(() => {
     if (modelClass && evaluators && Array.isArray(modelClass.attributes)) {
       const newMap = {};
-      modelClass.attributes.map((attribute) => {
+      modelClass.attributes.forEach((attribute) => {
         newMap[attribute.id] = evaluators.filter(
           (evaluator) => evaluator.type === attribute.type
         );
@@ -83,7 +79,7 @@ function AggregateEvaluatorEditor({
         })),
       });
     }
-  }, [evaluator, modelClass]);
+  }, [evaluator, modelClass, onEvaluatorChange]);
 
   return (
     <>

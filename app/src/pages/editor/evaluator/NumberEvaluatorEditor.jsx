@@ -112,8 +112,6 @@ function NumberEvaluatorEditor({
     (async () => {
       const newEvaluator = {
         ...originEvaluator,
-        min: modelClass.range.min,
-        max: modelClass.range.max,
         useOrigin,
         cyclic,
         origin,
@@ -155,22 +153,34 @@ function NumberEvaluatorEditor({
       if (evaluatorInstance != null) {
         setData(await generateData(1000, evaluatorInstance, query));
         if (query == null) {
-          setQuery(
-            (evaluatorInstance.getMax() - evaluatorInstance.getMin()) / 2
-          );
+          const q =
+            (evaluatorInstance.getMax() - evaluatorInstance.getMin()) / 2 +
+            evaluatorInstance.getMin();
+          if (modelClass.type === 'integer') {
+            setQuery(parseInt(q, 10));
+          } else {
+            setQuery(q);
+          }
         }
       }
     })();
-  }, [evaluatorInstance, setData]);
+  }, [evaluatorInstance, query, setData, setQuery]);
 
   useEffect(() => {
     const newInstance = evaluatorFactory(evaluator);
     newInstance.setRange(modelClass.range.min.id, modelClass.range.max.id);
     setEvaluatorInstance(newInstance);
-    if (query == null && evaluatorInstance) {
-      setQuery((evaluatorInstance.getMax() - evaluatorInstance.getMin()) / 2);
+    if (query == null) {
+      const q =
+        (newInstance.getMax() - newInstance.getMin()) / 2 +
+        newInstance.getMin();
+      if (modelClass.type === 'integer') {
+        setQuery(parseInt(q, 10));
+      } else {
+        setQuery(q);
+      }
     }
-  }, [evaluator, modelClass, setEvaluatorInstance]);
+  }, [evaluator, query, modelClass, setEvaluatorInstance]);
 
   useEffect(() => {
     if (query > 0) {
@@ -320,7 +330,7 @@ function NumberEvaluatorEditor({
                 split={1}
                 max={5}
                 resolution={1000}
-                reverese
+                reverse
                 value={linearityIfLess}
                 onChange={changelinearityIfLess}
               />
@@ -361,7 +371,7 @@ function NumberEvaluatorEditor({
               <Form.Group>
                 <Form.Control
                   type="number"
-                  value={query}
+                  value={query || ''}
                   onChange={({ target }) => setQuery(target.value)}
                 />
               </Form.Group>
