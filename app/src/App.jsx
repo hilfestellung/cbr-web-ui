@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+import { SagaContext } from './propTypes';
 import Navigation from './components/Navigation';
 
 import PrivateRoute from './utils/PrivateRoute';
@@ -15,7 +16,8 @@ import Privacy from './pages/privacy/Privacy';
 import Classes from './pages/editor/class/Classes';
 import Evaluators from './pages/editor/evaluator/NumberEvaluatorEditor';
 import Search from './pages/search/Search';
-import { SagaContext } from './propTypes';
+import Explore from './pages/explore/Explore';
+import ProjectEditor from './pages/editor/project/ProjectEditor';
 
 function App({ sagaContext }) {
   return (
@@ -36,6 +38,12 @@ function App({ sagaContext }) {
         </PrivateRoute>
         <PrivateRoute path="/editor">
           <Classes />
+        </PrivateRoute>
+        <PrivateRoute path="/project">
+          <ProjectEditor />
+        </PrivateRoute>
+        <PrivateRoute path="/explore">
+          <Explore />
         </PrivateRoute>
         {/* Public Routes
          */}

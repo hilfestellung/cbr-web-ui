@@ -8,6 +8,7 @@ import {
   httpPutAuthenticated,
   httpDeleteAuthenticated,
 } from '../../utils/sagas';
+import { BasicActionTypes } from '../basic/actions';
 
 const logger = getLogger('classes');
 
@@ -50,6 +51,7 @@ function* removeClassesSaga({ payload: { id } }) {
 }
 
 export function* watchClassesActions() {
+  yield takeEvery(BasicActionTypes.STARTUP_SUCCESS, fetchClassesSaga);
   yield takeEvery(ClassesActionType.FETCH_CLASSES, fetchClassesSaga);
   yield takeEvery(ClassesActionType.ADD_CLASS, addClassesSaga);
   yield takeEvery(ClassesActionType.PUT_CLASS, putClassesSaga);

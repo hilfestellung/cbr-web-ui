@@ -42,10 +42,12 @@ function* searchSaga({ payload: { location } }) {
     logger.trace('Requesting ID token');
     const idToken = (yield call([authentication, 'getIdTokenClaims'])).__raw;
     logger.trace('Search using id token');
-    const response = yield fetch(`${apiBaseUrl}/`, {
+    const response = yield fetch(`${apiBaseUrl}/evaluate`, {
+      method: 'POST',
       headers: {
         Authorization: 'Bearer ' + idToken,
       },
+      body: JSON.stringify(query),
     });
     logger.trace('Search is done. Parse response.');
     const json = yield response.json();

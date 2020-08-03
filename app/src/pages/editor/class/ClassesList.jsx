@@ -22,10 +22,6 @@ import {
 } from 'react-bootstrap-icons';
 
 import { ClassesSelector, ClassesAction } from '../../../modules/classes';
-import {
-  EvaluatorsSelector,
-  EvaluatorAction,
-} from '../../../modules/evaluators';
 import SimplePage from '../../../components/layout/SimplePage';
 import Icon from '../../../components/Icon';
 import { classFactory } from '@hilfestellung/cbr-kernel';
@@ -37,11 +33,8 @@ function ClassesList() {
 
   const isLoading = useSelector(ClassesSelector.isLoading);
   const items = useSelector(ClassesSelector.getItems);
-  // eslint-disable-next-line no-unused-vars
-  const evaluatorItems = useSelector(EvaluatorsSelector.getItems);
   const error = useSelector(ClassesSelector.getError);
 
-  const [loaded, setLoaded] = useState(false);
   const [newClassId, setNewClassId] = useState('');
   const [newClassType, setNewClassType] = useState('aggregate');
   const [newClassValid, setNewClassValid] = useState(false);
@@ -76,14 +69,6 @@ function ClassesList() {
     },
     [setNewClassType]
   );
-
-  useEffect(() => {
-    if (!loaded) {
-      dispatch(ClassesAction.fetchClasses());
-      dispatch(EvaluatorAction.fetchEvaluators());
-      setLoaded(true);
-    }
-  }, [loaded, setLoaded, dispatch]);
 
   useEffect(() => {
     setNewClassValid(!!newClassId && !!newClassType);

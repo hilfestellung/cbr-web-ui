@@ -12,6 +12,10 @@ import Navbar from 'react-bootstrap/Navbar';
 // import NavDropdown from "react-bootstrap/NavDropdown";
 import Spinner from 'react-bootstrap/Spinner';
 
+import globals from '../globals';
+
+const { window } = globals.window;
+
 function Navigation() {
   const {
     isAuthenticated,
@@ -39,8 +43,14 @@ function Navigation() {
               <Nav.Link as={Link} to="/search">
                 {t('Search')}
               </Nav.Link>
+              <Nav.Link as={Link} to="/project">
+                {t('Project')}
+              </Nav.Link>
               <Nav.Link as={Link} to="/editor">
                 {t('Editor')}
+              </Nav.Link>
+              <Nav.Link as={Link} to="/explore">
+                {t('Explore')}
               </Nav.Link>
             </>
           )}

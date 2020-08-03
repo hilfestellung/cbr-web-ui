@@ -6,12 +6,13 @@ export const basicReducer = handleActions(
     [BasicActionTypes.STARTUP]: (state) => ({ ...state, isStarting: true }),
     [BasicActionTypes.STARTUP_SUCCESS]: (
       state,
-      { payload: { name, contact, settings } }
+      { payload: { name, contact, settings, project } }
     ) => ({
       ...state,
       name,
       contact,
       settings,
+      project,
       isStarting: false,
       isStarted: true,
     }),
@@ -26,6 +27,7 @@ export const basicReducer = handleActions(
     name: '',
     contact: '',
     settings: {},
+    project: {},
     isStarting: false,
     isStarted: false,
     error: undefined,

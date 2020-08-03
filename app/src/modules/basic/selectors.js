@@ -7,6 +7,7 @@ const isStarted = createSelector(selectBasic, (state) => state.isStarted);
 const getName = createSelector(selectBasic, (state) => state.name);
 const getContact = createSelector(selectBasic, (state) => state.contact);
 const getSettings = createSelector(selectBasic, (state) => state.settings);
+const getProject = createSelector(selectBasic, (state) => state.project);
 
 export const BasicSelector = {
   isStarting,
@@ -14,4 +15,5 @@ export const BasicSelector = {
   getName,
   getContact,
   getSettings,
+  getProject,
 };

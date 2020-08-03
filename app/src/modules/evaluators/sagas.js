@@ -8,6 +8,7 @@ import {
   httpPutAuthenticated,
   httpDeleteAuthenticated,
 } from '../../utils/sagas';
+import { BasicActionTypes } from '../basic/actions';
 
 const logger = getLogger('evaluators');
 
@@ -50,6 +51,7 @@ function* removeEvaluatoresSaga({ payload: { id } }) {
 }
 
 export function* watchEvaluatorActions() {
+  yield takeEvery(BasicActionTypes.STARTUP_SUCCESS, fetchEvaluatorsSaga);
   yield takeEvery(EvaluatorActionType.FETCH_EVALUATORS, fetchEvaluatorsSaga);
   yield takeEvery(EvaluatorActionType.ADD_EVALUATOR, addEvaluatoresSaga);
   yield takeEvery(EvaluatorActionType.PUT_EVALUATOR, putEvaluatoresSaga);

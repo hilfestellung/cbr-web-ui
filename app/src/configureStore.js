@@ -12,6 +12,7 @@ import { watchSearchActions, searchReducer } from './modules/search';
 import { watchUserActions, userReducer } from './modules/user';
 import { classesReducer, watchClassesActions } from './modules/classes';
 import { evaluatorsReducer, watchEvaluatorActions } from './modules/evaluators';
+import { objectsReducer, watchObjectActions } from './modules/objects';
 
 const { isProduction } = globals;
 
@@ -32,6 +33,7 @@ export default function (context) {
     basic: basicReducer,
     classes: classesReducer,
     evaluators: evaluatorsReducer,
+    object: objectsReducer,
     user: userReducer,
     search: searchReducer,
     location: locationReducer,
@@ -43,6 +45,7 @@ export default function (context) {
     watchLocation,
     watchUserActions,
     watchClassesActions,
+    watchObjectActions,
     watchEvaluatorActions,
     watchSearchActions,
   ];
