@@ -24,16 +24,22 @@ function AggregateEvaluatorEditor({
   const changeEvaluator = useCallback(
     (id) => {
       return ({ target }) => {
+        let exists = !!evaluator.attributes.find((entry) => entry.id === id);
         onEvaluatorChange({
           ...evaluator,
-          attributes: evaluator.attributes.map((attribute) =>
-            attribute.id === id
-              ? {
-                  ...attribute,
-                  evaluator: target.value,
-                }
-              : attribute
-          ),
+          attributes: exists
+            ? evaluator.attributes.map((attribute) =>
+                attribute.id === id
+                  ? {
+                      ...attribute,
+                      evaluator: target.value,
+                    }
+                  : attribute
+              )
+            : [
+                ...evaluator.attributes,
+                { id, evaluator: target.value, weight: 0 },
+              ],
         });
       };
     },
@@ -100,9 +106,12 @@ function AggregateEvaluatorEditor({
         </Form.Group>
         <div className="mr-2" style={{ width: '10%' }}></div>
       </div>
-      {evaluator &&
-        Array.isArray(evaluator.attributes) &&
-        evaluator.attributes.map((attribute, index) => {
+      {modelClass &&
+        Array.isArray(modelClass.attributes) &&
+        modelClass.attributes.map((modelAttribute, index) => {
+          const attribute = evaluator.attributes.find(
+            (entry) => entry.id === modelAttribute.id
+          ) || { id: modelAttribute.id };
           return (
             <div key={attribute.id} className="d-flex flex-row">
               <Form.Group

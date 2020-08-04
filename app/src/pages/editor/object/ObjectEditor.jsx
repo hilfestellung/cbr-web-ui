@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import debounce from 'lodash/debounce';
 
@@ -49,8 +49,6 @@ function retrieve(queryObject) {
       return { count: 0, cases: [] };
     });
 }
-
-const debouncedRetrieve = debounce(retrieve, 500);
 
 const COL_WIDTH = 100 / 7;
 

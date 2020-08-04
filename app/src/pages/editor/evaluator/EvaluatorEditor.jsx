@@ -4,6 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import isEqual from 'lodash/isEqual';
+import cloneDeep from 'lodash/cloneDeep';
 
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -17,7 +18,9 @@ function EvaluatorEditor({ evaluator, children }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const [editableEvaluator, setEditableEvaluator] = useState(evaluator);
+  const [editableEvaluator, setEditableEvaluator] = useState(
+    cloneDeep(evaluator)
+  );
   const [hasChanges, setHasChanges] = useState(false);
 
   const submit = useCallback(
@@ -34,7 +37,7 @@ function EvaluatorEditor({ evaluator, children }) {
   );
 
   const reset = useCallback(() => {
-    setEditableEvaluator(evaluator);
+    setEditableEvaluator(cloneDeep(evaluator));
   }, [evaluator, setEditableEvaluator]);
 
   const onEvaluatorChange = useCallback(
@@ -45,7 +48,7 @@ function EvaluatorEditor({ evaluator, children }) {
   );
 
   useEffect(() => {
-    setEditableEvaluator({ ...evaluator });
+    setEditableEvaluator(cloneDeep(evaluator));
   }, [evaluator, setEditableEvaluator]);
 
   useEffect(() => {

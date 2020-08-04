@@ -12,8 +12,8 @@ function QuietFormControl({ value, disabled, className, onChange, ...props }) {
       if (event && event.preventDefault) {
         event.preventDefault();
       }
-      if (event && event.stoPropagation) {
-        event.stoPropagation();
+      if (event && event.stopPropagation) {
+        event.stopPropagation();
       }
       setQuiet(!quiet);
     },
@@ -24,6 +24,12 @@ function QuietFormControl({ value, disabled, className, onChange, ...props }) {
     (event) => {
       const { keyCode, type } = event;
       if (keyCode === 13 || type === 'blur') {
+        if (event && event.preventDefault) {
+          event.preventDefault();
+        }
+        if (event && event.stopPropagation) {
+          event.stopPropagation();
+        }
         if (typeof onChange === 'function') {
           onChange(editableValue);
         }
