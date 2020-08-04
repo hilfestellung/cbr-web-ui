@@ -19,7 +19,6 @@ export function symbolToString(data, language) {
 }
 
 function Symbol({ data }) {
-  console.log('Symbol', data);
   const { i18n } = useTranslation();
   const { language } = i18n;
   return symbolToString(data, language);

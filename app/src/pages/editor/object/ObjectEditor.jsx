@@ -123,6 +123,9 @@ function ObjectEditor({ aggregateClass, aggregateObject }) {
             const modelClass = classes.find(
               (clazz) => clazz.id === attribute.type
             );
+            const elementClass = modelClass.elementType
+              ? classes.find((clazz) => clazz.id === modelClass.elementType)
+              : null;
             return (
               <tr key={attribute.id}>
                 <td>
@@ -156,23 +159,56 @@ function ObjectEditor({ aggregateClass, aggregateObject }) {
                             ))}
                         </Form.Control>
                       )}
-                      {modelClass.type !== 'string' && (
+                      {modelClass.type === 'set' && (
                         <Form.Control
-                          type={
-                            modelClass.type === 'integer' ||
-                            modelClass.type === 'float'
-                              ? 'number'
-                              : 'text'
-                          }
+                          as="select"
                           value={editableObject[attribute.id] || ''}
-                          onChange={({ target }) =>
-                            setEditableObject({
+                          onChange={({ target }) => {
+                            console.log(
+                              Array.from(target.selectedOptions).map(
+                                (opt) => opt.value
+                              )
+                            );
+                            return setEditableObject({
                               ...editableObject,
-                              [attribute.id]: target.value,
-                            })
-                          }
-                        />
+                              [attribute.id]: Array.from(
+                                target.selectedOptions
+                              ).map((opt) => opt.value),
+                            });
+                          }}
+                          multiple
+                        >
+                          {elementClass &&
+                            Array.isArray(elementClass.enumeration) &&
+                            elementClass.enumeration.map((entry) => (
+                              <option
+                                key={entry.id}
+                                value={entry.id}
+                                title={entry.id}
+                              >
+                                {entry.id}
+                              </option>
+                            ))}
+                        </Form.Control>
                       )}
+                      {modelClass.type !== 'string' &&
+                        modelClass.type !== 'set' && (
+                          <Form.Control
+                            type={
+                              modelClass.type === 'integer' ||
+                              modelClass.type === 'float'
+                                ? 'number'
+                                : 'text'
+                            }
+                            value={editableObject[attribute.id] || ''}
+                            onChange={({ target }) =>
+                              setEditableObject({
+                                ...editableObject,
+                                [attribute.id]: target.value,
+                              })
+                            }
+                          />
+                        )}
                     </Col>
                   </Form.Group>
                 </td>
