@@ -19,6 +19,7 @@ function ListEditor({ list, children, onAdd, onRemove }) {
 
   const add = useCallback(() => {
     if (typeof onAdd === 'function') {
+      console.log('Add values');
       onAdd(values);
       setValues({});
     }
@@ -65,7 +66,9 @@ function ListEditor({ list, children, onAdd, onRemove }) {
   }, [view]);
 
   return (
-    <ListEditorContext.Provider value={{ values, onChange, addName, setView }}>
+    <ListEditorContext.Provider
+      value={{ values, submit: add, onChange, addName, setView }}
+    >
       {list &&
         list.map((item, index) => (
           <div key={`item_${index}`} className="d-flex">
@@ -120,7 +123,7 @@ ListEditor.Input = function ListEditorInput({
 
   return (
     <ListEditorContext.Consumer>
-      {({ values, onChange, addName }) => {
+      {({ values, onChange, addName, submit }) => {
         addName(name);
         return (
           <Form.Group
@@ -131,7 +134,24 @@ ListEditor.Input = function ListEditorInput({
             <Form.Control
               type="text"
               value={values[name] || ''}
-              onChange={({ target }) => onChange(name, target.value)}
+              onKeyDown={(event) => {
+                const { keyCode } = event;
+                if (keyCode === 13) {
+                  if (event.preventDefault) {
+                    event.preventDefault();
+                  }
+                  if (event.stopPropagation) {
+                    event.stopPropagation();
+                  }
+                  if (values[name]) {
+                    submit();
+                  }
+                  return;
+                }
+              }}
+              onChange={({ target }) => {
+                onChange(name, target.value);
+              }}
               placeholder={placeholder}
             />
           </Form.Group>

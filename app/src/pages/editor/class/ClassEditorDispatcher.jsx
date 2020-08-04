@@ -22,6 +22,8 @@ import EvaluatorEditor, {
 import NewEvaluator from '../evaluator/NewEvaluator';
 import AggregateEvaluatorEditor from '../evaluator/AggregateEvaluatorEditor';
 import LookupTableEditor from '../evaluator/LookupTableEditor';
+import SetEditor from './SetEditor';
+import SetEvaluatorEditor from '../evaluator/SetEvaluatorEditor';
 
 function ClassEditorDispatcher() {
   const { id, evaluatorId = 'ClassDefinition' } = useParams();
@@ -54,19 +56,28 @@ function ClassEditorDispatcher() {
             <ClassEditor modelClass={modelClass}>
               <ClassEditorContext.Consumer>
                 {({ originClass, editableClass, onClassChange }) => {
-                  return modelClass.type === 'aggregate' ? (
+                  if (editableClass.id !== id) {
+                    return null;
+                  }
+                  console.log('Editable class', id, editableClass, modelClass);
+                  return editableClass.type === 'aggregate' ? (
                     <AggregateEditor
                       modelClass={editableClass}
                       onClassChange={onClassChange}
                     />
-                  ) : modelClass.type === 'string' ? (
+                  ) : editableClass.type === 'set' ? (
+                    <SetEditor
+                      modelClass={editableClass}
+                      onClassChange={onClassChange}
+                    />
+                  ) : editableClass.type === 'string' ? (
                     <EnumerationEditor
                       modelClass={editableClass}
                       onClassChange={onClassChange}
                     />
-                  ) : modelClass.type === 'integer' ||
-                    modelClass.type === 'float' ||
-                    modelClass.type === 'date' ? (
+                  ) : editableClass.type === 'integer' ||
+                    editableClass.type === 'float' ||
+                    editableClass.type === 'date' ? (
                     <RangeEditor
                       originModelClass={originClass}
                       modelClass={editableClass}
@@ -93,6 +104,13 @@ function ClassEditorDispatcher() {
                     }) => {
                       return evaluator.pattern === 'aggregate' ? (
                         <AggregateEvaluatorEditor
+                          modelClass={modelClass}
+                          evaluator={editableEvaluator}
+                          originEvaluator={originEvaluator}
+                          onEvaluatorChange={onEvaluatorChange}
+                        />
+                      ) : evaluator.pattern === 'set' ? (
+                        <SetEvaluatorEditor
                           modelClass={modelClass}
                           evaluator={editableEvaluator}
                           originEvaluator={originEvaluator}

@@ -142,6 +142,7 @@ function ObjectEditor({ aggregateClass, aggregateObject }) {
                             })
                           }
                         >
+                          <option>-</option>
                           {modelClass &&
                             Array.isArray(modelClass.enumeration) &&
                             modelClass.enumeration.map((entry) => (

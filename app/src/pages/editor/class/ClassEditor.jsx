@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
+import cloneDeep from 'lodash/cloneDeep';
+
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
@@ -16,7 +18,9 @@ function ClassEditor({ modelClass, children }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const [editableModelClass, setEditableModelClass] = useState(modelClass);
+  const [editableModelClass, setEditableModelClass] = useState(
+    cloneDeep(modelClass)
+  );
   const [hasChanges, setHasChanges] = useState(false);
 
   const submit = useCallback(
@@ -33,7 +37,7 @@ function ClassEditor({ modelClass, children }) {
   );
 
   const reset = useCallback(() => {
-    setEditableModelClass(modelClass);
+    setEditableModelClass(cloneDeep(modelClass));
   }, [modelClass, setEditableModelClass]);
 
   const onClassChange = useCallback(
@@ -44,7 +48,7 @@ function ClassEditor({ modelClass, children }) {
   );
 
   useEffect(() => {
-    setEditableModelClass(modelClass);
+    setEditableModelClass(cloneDeep(modelClass));
   }, [modelClass]);
 
   useEffect(() => {
