@@ -6,9 +6,8 @@ import Button from 'react-bootstrap/Button';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
 
-import { Check, Dash, Dot } from 'react-bootstrap-icons';
-
 import { PropTypes, NOP } from '../propTypes';
+import Icon from './Icon';
 
 function SubmittableControl({
   origin,
@@ -82,7 +81,13 @@ function SubmittableControl({
           disabled={!isChanging}
           onClick={acceptValue}
         >
-          {isChanging ? <Dash /> : hasChanges ? <Check /> : <Dot />}
+          {isChanging ? (
+            <Icon name="minus" />
+          ) : hasChanges ? (
+            <Icon name="check" />
+          ) : (
+            <Icon name="dot-circle" />
+          )}
         </Button>
       </InputGroup.Append>
     </InputGroup>

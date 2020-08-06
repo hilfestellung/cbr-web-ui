@@ -1,9 +1,10 @@
-// eslint-disable-next-line no-unused-vars
-import React from 'react';
 import { PropTypes } from '../propTypes';
 import { useTranslation } from 'react-i18next';
 
 export function symbolToString(data, language) {
+  if (Array.isArray(data)) {
+    return data.map((entry) => symbolToString(entry, language)).join(', ');
+  }
   if (
     data &&
     data.properties &&

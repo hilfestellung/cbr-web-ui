@@ -11,15 +11,6 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Spinner from 'react-bootstrap/Spinner';
-import {
-  CardList,
-  Fonts,
-  Hash,
-  CalendarDate,
-  Braces,
-  PlusSquare,
-  Trash,
-} from 'react-bootstrap-icons';
 
 import { ClassesSelector, ClassesAction } from '../../../modules/classes';
 import SimplePage from '../../../components/layout/SimplePage';
@@ -128,7 +119,7 @@ function ClassesList() {
               disabled={!newClassValid}
               onClick={addNewClass}
             >
-              <PlusSquare />
+              <Icon name="plus-square" />
               &nbsp;{t('Add')}
             </Button>
           </Form>
@@ -148,19 +139,17 @@ function ClassesList() {
                 >
                   <div className="d-flex align-items-center">
                     <div className="flex-shrink-1 mr-3">
-                      <Icon size={32}>
-                        {item.type === 'aggregate' ? (
-                          <CardList />
-                        ) : item.type === 'string' ? (
-                          <Fonts />
-                        ) : item.type === 'integer' || item.type === 'float' ? (
-                          <Hash />
-                        ) : item.type === 'date' ? (
-                          <CalendarDate />
-                        ) : item.type === 'set' ? (
-                          <Braces />
-                        ) : null}
-                      </Icon>
+                      {item.type === 'aggregate' ? (
+                        <Icon name="list" size={32} />
+                      ) : item.type === 'string' ? (
+                        <Icon name="font" size={32} />
+                      ) : item.type === 'integer' || item.type === 'float' ? (
+                        <Icon name="hashtag" size={32} />
+                      ) : item.type === 'date' ? (
+                        <Icon name="calendar-alt" size={32} />
+                      ) : item.type === 'set' ? (
+                        <Icon name="folder" size={32} />
+                      ) : null}
                     </div>
                     <div className="flex-grow-1">
                       <div>{item.id}</div>
@@ -179,9 +168,7 @@ function ClassesList() {
                           removeClass(item.id);
                         }}
                       >
-                        <Icon>
-                          <Trash />
-                        </Icon>
+                        <Icon name="trash-alt" />
                       </Button>
                     </div>
                   </div>

@@ -2,8 +2,8 @@ import React, { useState, useCallback, useEffect, useRef } from 'react';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { PlusSquare, Trash2Fill } from 'react-bootstrap-icons';
 import { PropTypes, Children, NOP } from '../propTypes';
+import Icon from './Icon';
 
 const ListEditorContext = React.createContext();
 
@@ -86,7 +86,7 @@ function ListEditor({ list, children, onAdd, onRemove }) {
                 type="button"
                 onClick={() => remove(index)}
               >
-                <Trash2Fill />
+                <Icon name="trash-alt" />
               </Button>
             </div>
           </div>
@@ -95,7 +95,7 @@ function ListEditor({ list, children, onAdd, onRemove }) {
         {children}
         <div>
           <Button variant="outline-primary" type="button" onClick={add}>
-            <PlusSquare />
+            <Icon name="plus-square" />
           </Button>
         </div>
       </div>

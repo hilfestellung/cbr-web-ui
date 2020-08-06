@@ -10,7 +10,7 @@ import { BasicSelector } from '../../modules/basic/selectors';
 import { ClassesSelector } from '../../modules/classes';
 import ObjectEditor from '../editor/object/ObjectEditor';
 
-function Explore(props) {
+function Explore() {
   const project = useSelector(BasicSelector.getProject);
   const classes = useSelector(ClassesSelector.getItems);
 

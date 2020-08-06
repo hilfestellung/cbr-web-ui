@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { PatchQuestion } from 'react-bootstrap-icons';
-
 import SimplePage from './layout/SimplePage';
 import { PropTypes, Children } from '../propTypes';
+import Icon from './Icon';
 
 function InformationWhatsNext({ icon, title, children }) {
   return (
@@ -27,7 +26,7 @@ function InformationWhatsNext({ icon, title, children }) {
   );
 }
 InformationWhatsNext.defaultProps = {
-  icon: <PatchQuestion />,
+  icon: <Icon name="question-circle" />,
   title: undefined,
 };
 InformationWhatsNext.propTypes = {

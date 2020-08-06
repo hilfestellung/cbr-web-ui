@@ -1,12 +1,12 @@
 import React from 'react';
 
 import { Route, Switch } from 'react-router-dom';
-import { Diagram3 } from 'react-bootstrap-icons';
 
 import Workspace from '../../../components/layout/Workspace';
 import InformationWhatsNext from '../../../components/InformationWhatsNext';
 import ClassesList from './ClassesList';
 import ClassEditorDispatcher from './ClassEditorDispatcher';
+import Icon from '../../../components/Icon';
 
 function Classes() {
   return (
@@ -19,7 +19,7 @@ function Classes() {
           </Route>
           <Route path="/editor">
             <InformationWhatsNext
-              icon={<Diagram3 />}
+              icon={<Icon name="sitemap" />}
               title={
                 <h1 className="d-flex justify-content-center mt-5">
                   Wissensmodell bearbeiten
