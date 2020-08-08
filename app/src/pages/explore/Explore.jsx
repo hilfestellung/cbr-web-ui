@@ -8,7 +8,7 @@ import SimplePage from '../../components/layout/SimplePage';
 
 import { BasicSelector } from '../../modules/basic/selectors';
 import { ClassesSelector } from '../../modules/classes';
-import ObjectEditor from '../editor/object/ObjectEditor';
+import ObjectExplorer from '../editor/object/ObjectExplorer';
 
 function Explore() {
   const project = useSelector(BasicSelector.getProject);
@@ -29,7 +29,7 @@ function Explore() {
     <SimplePage fluid>
       <Row>
         <Col xs={12}>
-          <ObjectEditor aggregateClass={queryClass} />
+          <ObjectExplorer aggregateClass={queryClass} />
         </Col>
       </Row>
     </SimplePage>
