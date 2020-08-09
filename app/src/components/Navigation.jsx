@@ -49,6 +49,9 @@ function Navigation() {
               <Nav.Link as={Link} to="/editor">
                 {t('Editor')}
               </Nav.Link>
+              <Nav.Link as={Link} to="/import">
+                {t('Import')}
+              </Nav.Link>
               <Nav.Link as={Link} to="/explore">
                 {t('Explore')}
               </Nav.Link>

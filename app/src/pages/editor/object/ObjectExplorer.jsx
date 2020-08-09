@@ -52,7 +52,7 @@ function ObjectExplorer({ aggregateClass }) {
   const { language } = i18n;
   const classes = useSelector(ClassesSelector.getItems);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [aggregateObject, setAggregateObject] = useState(
     createSample(aggregateClass)
@@ -60,9 +60,9 @@ function ObjectExplorer({ aggregateClass }) {
 
   const [retrievalResult, setRetrievalResult] = useState();
 
-  // const addCase = useCallback(() => {
-  //   dispatch(ObjectAction.addObject(toAggregateObject(aggregateObject)));
-  // }, [aggregateObject]);
+  const addCase = useCallback(() => {
+    dispatch(ObjectAction.addObject(aggregateObject.attributes));
+  }, [aggregateObject]);
 
   const executeRetrieve = useCallback(
     debounce((queryObject) => {
@@ -72,7 +72,6 @@ function ObjectExplorer({ aggregateClass }) {
     }, 300),
     [setRetrievalResult]
   );
-  // console.log('Agg', aggregateObject);
 
   const [validationRules, setValidationRules] = useState({});
 
@@ -87,7 +86,9 @@ function ObjectExplorer({ aggregateClass }) {
     <Form
       data={aggregateObject}
       onSubmit={(event) => {
-        executeRetrieve(event.attributes.filter((entry) => !!entry.value));
+        const { attributes } = event;
+        executeRetrieve(attributes.filter((entry) => !!entry.value));
+        setAggregateObject({ ...aggregateObject, attributes });
       }}
       instantSubmit
       validationRules={validationRules}
@@ -181,6 +182,12 @@ function ObjectExplorer({ aggregateClass }) {
                 </tr>
               );
             })}
+          <tr>
+            <td className="text-right">
+              <Button onClick={addCase}>Add as case</Button>
+            </td>
+            <td colSpan="5"></td>
+          </tr>
         </tbody>
       </Table>
     </Form>

@@ -49,9 +49,19 @@ function* removeObjectsSaga({ payload: { id } }) {
   );
 }
 
+function* removeAllObjectsSaga() {
+  logger.debug('Deleting all objects');
+  yield httpDeleteAuthenticated(
+    `/aggregate`,
+    ObjectAction.removeAllObjectsSuccess,
+    ObjectAction.removeAllObjectsFailed
+  );
+}
+
 export function* watchObjectActions() {
   yield takeEvery(ObjectActionType.FETCH_OBJECTS, fetchObjectsSaga);
   yield takeEvery(ObjectActionType.ADD_OBJECT, addObjectsSaga);
   yield takeEvery(ObjectActionType.PUT_OBJECT, putObjectsSaga);
   yield takeEvery(ObjectActionType.REMOVE_OBJECT, removeObjectsSaga);
+  yield takeEvery(ObjectActionType.REMOVE_ALL_OBJECTS, removeAllObjectsSaga);
 }

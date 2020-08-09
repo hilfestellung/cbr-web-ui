@@ -16,6 +16,10 @@ const REMOVE_OBJECT = '[Objects] Remove object';
 const REMOVE_OBJECT_SUCCESS = '[Objects] Remove object success';
 const REMOVE_OBJECT_FAILED = '[Objects] Remove object failed';
 
+const REMOVE_ALL_OBJECTS = '[Objects] Remove all objects';
+const REMOVE_ALL_OBJECTS_SUCCESS = '[Objects] Remove all objects success';
+const REMOVE_ALL_OBJECTS_FAILED = '[Objects] Remove all objects failed';
+
 const fetchObjects = createAction(FETCH_OBJECTS);
 const fetchObjectsSuccess = createAction(FETCH_OBJECTS_SUCCESS, (items) => ({
   items,
@@ -59,6 +63,15 @@ const removeObjectFailed = createAction(REMOVE_OBJECT_FAILED, (error) => ({
   error,
 }));
 
+const removeAllObjects = createAction(REMOVE_ALL_OBJECTS);
+const removeAllObjectsSuccess = createAction(REMOVE_ALL_OBJECTS_SUCCESS);
+const removeAllObjectsFailed = createAction(
+  REMOVE_ALL_OBJECTS_FAILED,
+  (error) => ({
+    error,
+  })
+);
+
 export const ObjectAction = {
   fetchObjects,
   fetchObjectsSuccess,
@@ -72,6 +85,9 @@ export const ObjectAction = {
   removeObject,
   removeObjectSuccess,
   removeObjectFailed,
+  removeAllObjects,
+  removeAllObjectsSuccess,
+  removeAllObjectsFailed,
 };
 
 export const ObjectActionType = {
@@ -87,4 +103,7 @@ export const ObjectActionType = {
   REMOVE_OBJECT,
   REMOVE_OBJECT_SUCCESS,
   REMOVE_OBJECT_FAILED,
+  REMOVE_ALL_OBJECTS,
+  REMOVE_ALL_OBJECTS_SUCCESS,
+  REMOVE_ALL_OBJECTS_FAILED,
 };

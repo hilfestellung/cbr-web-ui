@@ -78,6 +78,25 @@ export const objectsReducer = handleActions(
       isSending: false,
       error: error,
     }),
+
+    [ObjectActionType.REMOVE_ALL_OBJECTS]: (state) => ({
+      ...state,
+      isSending: true,
+      error: null,
+    }),
+    [ObjectActionType.REMOVE_ALL_OBJECTS_SUCCESS]: (state) => ({
+      ...state,
+      items: [],
+      isSending: false,
+    }),
+    [ObjectActionType.REMOVE_ALL_OBJECTS_FAILED]: (
+      state,
+      { payload: { error } }
+    ) => ({
+      ...state,
+      isSending: false,
+      error: error,
+    }),
   },
   {
     isLoading: false,
