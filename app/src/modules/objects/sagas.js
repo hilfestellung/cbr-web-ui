@@ -1,4 +1,4 @@
-import { takeEvery } from 'redux-saga/effects';
+import { takeEvery, take, put } from 'redux-saga/effects';
 
 import { ObjectAction, ObjectActionType } from './actions';
 import getLogger from '../../utils/logger';
@@ -20,7 +20,7 @@ function* fetchObjectsSaga() {
   );
 }
 
-function* addObjectsSaga({ payload: { aggregateObject } }) {
+function* addObjectSaga({ payload: { aggregateObject } }) {
   logger.debug('Adding object', aggregateObject);
   yield httpPostAuthenticated(
     `/aggregate`,
@@ -28,6 +28,22 @@ function* addObjectsSaga({ payload: { aggregateObject } }) {
     ObjectAction.addObjectSuccess,
     ObjectAction.addObjectFailed
   );
+}
+
+function* addObjectsSaga({ payload: { aggregateObjects } }) {
+  try {
+    for (let i = 0, n = aggregateObjects.length; i < n; i++) {
+      yield put(ObjectAction.addObject(aggregateObjects[i], i));
+      yield take([
+        ObjectActionType.ADD_OBJECT_SUCCESS,
+        ObjectActionType.ADD_OBJECT_FAILED,
+      ]);
+    }
+  } catch (err) {
+    logger.error('Failed adding objects', err);
+  } finally {
+    yield put(ObjectAction.addObjectsSuccess());
+  }
 }
 
 function* putObjectsSaga({ payload: { aggregateObject } }) {
@@ -60,7 +76,8 @@ function* removeAllObjectsSaga() {
 
 export function* watchObjectActions() {
   yield takeEvery(ObjectActionType.FETCH_OBJECTS, fetchObjectsSaga);
-  yield takeEvery(ObjectActionType.ADD_OBJECT, addObjectsSaga);
+  yield takeEvery(ObjectActionType.ADD_OBJECT, addObjectSaga);
+  yield takeEvery(ObjectActionType.ADD_OBJECTS, addObjectsSaga);
   yield takeEvery(ObjectActionType.PUT_OBJECT, putObjectsSaga);
   yield takeEvery(ObjectActionType.REMOVE_OBJECT, removeObjectsSaga);
   yield takeEvery(ObjectActionType.REMOVE_ALL_OBJECTS, removeAllObjectsSaga);

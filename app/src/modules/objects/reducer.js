@@ -17,10 +17,11 @@ export const objectsReducer = handleActions(
       { payload: { error } }
     ) => ({ ...state, error, isLoading: false }),
 
-    [ObjectActionType.ADD_OBJECT]: (state) => ({
+    [ObjectActionType.ADD_OBJECT]: (state, { payload: { index = 0 } }) => ({
       ...state,
       isSending: true,
       error: null,
+      added: index,
     }),
     [ObjectActionType.ADD_OBJECT_SUCCESS]: (
       state,
@@ -34,6 +35,30 @@ export const objectsReducer = handleActions(
       ...state,
       isSending: false,
       error: error,
+    }),
+    [ObjectActionType.ADD_OBJECTS]: (
+      state,
+      { payload: { aggregateObjects } }
+    ) => ({
+      ...state,
+      isSending: true,
+      error: null,
+      added: 0,
+      addCount: aggregateObjects.length,
+    }),
+    [ObjectActionType.ADD_OBJECTS_SUCCESS]: (state) => ({
+      ...state,
+      isSending: true,
+      error: null,
+      added: 0,
+      addCount: 0,
+    }),
+    [ObjectActionType.ADD_OBJECTS_FAILED]: (state, { payload: { error } }) => ({
+      ...state,
+      isSending: true,
+      error,
+      added: 0,
+      addCount: 0,
     }),
 
     [ObjectActionType.PUT_OBJECT]: (state) => ({

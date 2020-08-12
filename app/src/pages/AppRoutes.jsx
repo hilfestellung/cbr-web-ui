@@ -39,11 +39,11 @@ function AppRoutes() {
       <PrivateRoute path="/project">
         <ProjectEditor />
       </PrivateRoute>
-      <PrivateRoute path="/explore">
-        <Explore />
-      </PrivateRoute>
       {/* Public Routes
        */}
+      <Route path="/explore">
+        <Explore />
+      </Route>
       <Route path="/privacy-statement">
         <Privacy />
       </Route>

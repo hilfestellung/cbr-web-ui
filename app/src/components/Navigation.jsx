@@ -38,11 +38,11 @@ function Navigation() {
         <Nav className="mr-auto">
           {/*
            */}
+          <Nav.Link as={Link} to="/explore">
+            {t('Explore')}
+          </Nav.Link>
           {isAuthenticated && (
             <>
-              <Nav.Link as={Link} to="/search">
-                {t('Search')}
-              </Nav.Link>
               <Nav.Link as={Link} to="/project">
                 {t('Project')}
               </Nav.Link>
@@ -51,9 +51,6 @@ function Navigation() {
               </Nav.Link>
               <Nav.Link as={Link} to="/import">
                 {t('Import')}
-              </Nav.Link>
-              <Nav.Link as={Link} to="/explore">
-                {t('Explore')}
               </Nav.Link>
             </>
           )}

@@ -86,7 +86,7 @@ function AggregateEvaluatorEditor({
       });
     }
   }, [evaluator, modelClass, onEvaluatorChange]);
-
+  console.log(evaluator);
   return (
     <>
       <div className="d-flex flex-row">
@@ -151,7 +151,7 @@ function AggregateEvaluatorEditor({
                 <Form.Control
                   type="number"
                   name="weight"
-                  value={attribute.weight != null ? attribute.weight : 0}
+                  value={attribute.weight || ''}
                   onChange={changeWeight(attribute.id)}
                   disabled={evaluator.mode !== 'Average'}
                 />

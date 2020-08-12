@@ -69,6 +69,17 @@ export function* httpGetAuthenticated(
   );
 }
 
+export function* httpGet(url, successAction, failedAction, requestConfig = {}) {
+  yield httpRequest(
+    'GET',
+    url,
+    undefined,
+    successAction,
+    failedAction,
+    requestConfig
+  );
+}
+
 export function* httpPostAuthenticated(
   url,
   data,
@@ -148,12 +159,74 @@ function* httpRequestAuthenticated(
     logger.trace('Processing request now');
     const idToken = (yield call([authentication, 'getIdTokenClaims'])).__raw;
     const { response } = yield race({
+      // eslint-disable-next-line no-undef
       response: fetch(`${apiBaseUrl}${url}`, {
         ...requestConfig,
         method,
         headers: {
           ...requestConfig.headers,
           Authorization: 'Bearer ' + idToken,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }),
+      timeout: delay(5000),
+    });
+    logger.trace('Request is processed.');
+    if (response) {
+      const json = yield response.json();
+      if (response.status < 200 || response.status > 299) {
+        throw new HttpError(response.status);
+      } else {
+        logger.trace(`Request "${method} ${url}" was successful:`, json);
+        yield put(successAction(json));
+      }
+    } else {
+      throw new HttpError(504, 'RequestTimeout', 'Timed out');
+    }
+  } catch (error) {
+    logger.error(`Request "${method} ${url}" failed`, error);
+    if (error instanceof HttpError) {
+      yield put(
+        failedAction({
+          status: error.status,
+          code: error.code,
+          message: error.message,
+          stack: error.stack,
+        })
+      );
+    } else {
+      yield put(
+        failedAction({
+          status: 500,
+          code: 'UnexpectedError',
+          message: error.message,
+          stack: error.stack,
+        })
+      );
+    }
+  }
+}
+
+function* httpRequest(
+  method,
+  url,
+  data,
+  successAction,
+  failedAction,
+  requestConfig = {}
+) {
+  try {
+    const apiBaseUrl = yield getContext('apiBaseUrl');
+
+    logger.trace('Processing request now');
+    const { response } = yield race({
+      // eslint-disable-next-line no-undef
+      response: fetch(`${apiBaseUrl}${url}`, {
+        ...requestConfig,
+        method,
+        headers: {
+          ...requestConfig.headers,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),

@@ -8,6 +8,10 @@ const ADD_OBJECT = '[Objects] Add object';
 const ADD_OBJECT_SUCCESS = '[Objects] Add object success';
 const ADD_OBJECT_FAILED = '[Objects] Add object failed';
 
+const ADD_OBJECTS = '[Objects] Add objects';
+const ADD_OBJECTS_SUCCESS = '[Objects] Add objects success';
+const ADD_OBJECTS_FAILED = '[Objects] Add objects failed';
+
 const PUT_OBJECT = '[Objects] Put object';
 const PUT_OBJECT_SUCCESS = '[Objects] Put object success';
 const PUT_OBJECT_FAILED = '[Objects] Put object failed';
@@ -28,8 +32,9 @@ const fetchObjectsFailed = createAction(FETCH_OBJECTS_FAILED, (error) => ({
   error: error,
 }));
 
-const addObject = createAction(ADD_OBJECT, (aggregateObject) => ({
+const addObject = createAction(ADD_OBJECT, (aggregateObject, index) => ({
   aggregateObject,
+  index,
 }));
 const addObjectSuccess = createAction(
   ADD_OBJECT_SUCCESS,
@@ -38,6 +43,14 @@ const addObjectSuccess = createAction(
   })
 );
 const addObjectFailed = createAction(ADD_OBJECT_FAILED, (error) => ({ error }));
+
+const addObjects = createAction(ADD_OBJECTS, (aggregateObjects) => ({
+  aggregateObjects,
+}));
+const addObjectsSuccess = createAction(ADD_OBJECTS_SUCCESS);
+const addObjectsFailed = createAction(ADD_OBJECTS_FAILED, (error) => ({
+  error,
+}));
 
 const putObject = createAction(PUT_OBJECT, (aggregateObject) => ({
   aggregateObject,
@@ -79,6 +92,9 @@ export const ObjectAction = {
   addObject,
   addObjectSuccess,
   addObjectFailed,
+  addObjects,
+  addObjectsSuccess,
+  addObjectsFailed,
   putObject,
   putObjectSuccess,
   putObjectFailed,
@@ -97,6 +113,9 @@ export const ObjectActionType = {
   ADD_OBJECT,
   ADD_OBJECT_SUCCESS,
   ADD_OBJECT_FAILED,
+  ADD_OBJECTS,
+  ADD_OBJECTS_SUCCESS,
+  ADD_OBJECTS_FAILED,
   PUT_OBJECT,
   PUT_OBJECT_SUCCESS,
   PUT_OBJECT_FAILED,

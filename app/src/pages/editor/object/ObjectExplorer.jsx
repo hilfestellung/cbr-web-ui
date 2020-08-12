@@ -16,6 +16,7 @@ import globals from '../../../globals';
 import Form from '../../../components/Form';
 import { useTranslation } from 'react-i18next';
 import { createValidationRules } from './utils';
+import { useAuth0 } from '@auth0/auth0-react';
 
 function createSample(aggregateClass) {
   if (aggregateClass && Array.isArray(aggregateClass.attributes)) {
@@ -29,14 +30,14 @@ function createSample(aggregateClass) {
   return { attributes: [] };
 }
 
-function retrieve(queryObject) {
+function retrieve(queryObject, facets) {
   // eslint-disable-next-line no-undef
   return fetch(`${globals.apiBaseUrl}/evaluate`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ query: queryObject }),
+    body: JSON.stringify({ query: queryObject, options: { facets } }),
   })
     .then((response) => response.json())
     .catch((err) => {
@@ -50,6 +51,8 @@ const COL_WIDTH = 100 / 7;
 function ObjectExplorer({ aggregateClass }) {
   const { i18n } = useTranslation();
   const { language } = i18n;
+  const { isAuthenticated } = useAuth0();
+
   const classes = useSelector(ClassesSelector.getItems);
 
   const dispatch = useDispatch();
@@ -67,10 +70,15 @@ function ObjectExplorer({ aggregateClass }) {
   const executeRetrieve = useCallback(
     debounce((queryObject) => {
       (async () => {
-        setRetrievalResult(await retrieve(queryObject));
+        setRetrievalResult(
+          await retrieve(
+            queryObject,
+            aggregateClass.attributes.map((attribute) => ({ id: attribute.id }))
+          )
+        );
       })();
     }, 300),
-    [setRetrievalResult]
+    [aggregateClass, setRetrievalResult]
   );
 
   const [validationRules, setValidationRules] = useState({});
@@ -96,7 +104,13 @@ function ObjectExplorer({ aggregateClass }) {
       <Table bordered>
         <thead>
           <tr>
-            <td style={{ width: COL_WIDTH * 2 + '%' }}></td>
+            <td style={{ width: COL_WIDTH * 2 + '%' }} className="text-right">
+              {retrievalResult && retrievalResult.count > 0 ? (
+                <div>
+                  <strong>{retrievalResult.count}</strong> similar cases.
+                </div>
+              ) : null}
+            </td>
             {RANGE5.map((num) => (
               <th
                 key={`case_header_${num}`}
@@ -182,12 +196,14 @@ function ObjectExplorer({ aggregateClass }) {
                 </tr>
               );
             })}
-          <tr>
-            <td className="text-right">
-              <Button onClick={addCase}>Add as case</Button>
-            </td>
-            <td colSpan="5"></td>
-          </tr>
+          {isAuthenticated && (
+            <tr>
+              <td className="text-right">
+                <Button onClick={addCase}>Add as case</Button>
+              </td>
+              <td colSpan="5"></td>
+            </tr>
+          )}
         </tbody>
       </Table>
     </Form>

@@ -19,7 +19,6 @@ import { ClassesSelector, ClassesAction } from '../../modules/classes';
 import { determineMinMax } from './utils';
 
 const stringComparator = createStringComparator();
-const numberComparator = createNumberComparator();
 
 ClassCreator.propTypes = {
   names: PropTypes.arrayOf(PropTypes.string),

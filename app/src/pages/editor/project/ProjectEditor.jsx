@@ -8,11 +8,19 @@ import Button from 'react-bootstrap/Button';
 import globals from '../../../globals';
 import { ObjectSelector, ObjectAction } from '../../../modules/objects';
 import SimplePage from '../../../components/layout/SimplePage';
+import { ClassesSelector, ClassesAction } from '../../../modules/classes';
+import {
+  EvaluatorAction,
+  EvaluatorsSelector,
+} from '../../../modules/evaluators';
 
 function ProjectEditor() {
   const dispatch = useDispatch();
   const { getIdTokenClaims } = useAuth0();
 
+  const classes = useSelector(ClassesSelector.getItems);
+  const evaluators = useSelector(EvaluatorsSelector.getItems);
+  const isClassSending = useSelector(ClassesSelector.isSending);
   const isSending = useSelector(ObjectSelector.isSending);
 
   const reloadProject = useCallback(async () => {
@@ -34,6 +42,17 @@ function ProjectEditor() {
     dispatch(ObjectAction.removeAllObjects());
   }, [dispatch]);
 
+  const deleteAllClasses = useCallback(() => {
+    if (classes.length > 0) {
+      evaluators.forEach((evaluator) =>
+        dispatch(EvaluatorAction.removeEvaluator(evaluator.id))
+      );
+      classes.forEach((modelClass) =>
+        dispatch(ClassesAction.removeClass(modelClass.id))
+      );
+    }
+  }, [classes, isClassSending]);
+
   return (
     <SimplePage>
       <div className="mb-3">
@@ -42,10 +61,16 @@ function ProjectEditor() {
           Reload project
         </Button>
       </div>
-      <div>
+      <div className="mb-3">
         Delete all objects of the project{' '}
         <Button variant="danger" onClick={deleteAllObjects}>
           Delete objects
+        </Button>
+      </div>
+      <div>
+        Delete all classes of the project{' '}
+        <Button variant="danger" onClick={deleteAllClasses}>
+          Delete classes
         </Button>
       </div>
     </SimplePage>

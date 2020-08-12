@@ -3,7 +3,7 @@ import { takeEvery } from 'redux-saga/effects';
 import { ClassesAction, ClassesActionType } from './actions';
 import getLogger from '../../utils/logger';
 import {
-  httpGetAuthenticated,
+  httpGet,
   httpPostAuthenticated,
   httpPutAuthenticated,
   httpDeleteAuthenticated,
@@ -14,7 +14,7 @@ const logger = getLogger('classes');
 
 function* fetchClassesSaga() {
   logger.debug('Fetching classes');
-  yield httpGetAuthenticated(
+  yield httpGet(
     '/class',
     ClassesAction.fetchClassesSuccess,
     ClassesAction.fetchClassesFailed
